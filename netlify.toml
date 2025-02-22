@@ -1,5 +1,5 @@
 [build]
-  command = "flutter build web"
+  command = "./deploy.sh"
   publish = "build/web"
 
 [[plugins]]
