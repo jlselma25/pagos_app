@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:pagos_app/screens/horario_screen.dart';
+import 'package:pagos_app/screens/insertar_screen.dart';
 import 'package:pagos_app/screens/loading.dart';
 import 'package:pagos_app/screens/login_screen.dart';
 import 'package:pagos_app/screens/menu.dart';
@@ -19,6 +20,7 @@ final Map<String,Widget Function(BuildContext context)> appRoutes = {
   'horario' :      (_)  =>  const HorarioScreen(),
   'loading' :      (_)  =>  const LoadingScreen(),
   'listado'   :  (_)  =>  const RegistroScreen(),
+  'insertar'   :  (_)  =>  const InsertarScreen()
  
 
   

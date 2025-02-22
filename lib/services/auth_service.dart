@@ -19,10 +19,14 @@ class AuthService extends ChangeNotifier{
   late Usuario usuario; 
   bool _comprobando = false;
 
-    bool get comprobando => _comprobando;
+  bool get comprobando => _comprobando;
 
   set comprobando(bool value) {
     _comprobando = value;
+    notifyListeners();
+  }
+
+  error() {   
     notifyListeners();
   }
  
@@ -92,6 +96,10 @@ class AuthService extends ChangeNotifier{
 
      if (response.statusCode == 200){
             final respuesta = Resultado.fromJson(response.data);
+
+             if(respuesta.valor == '0' && respuesta.id == -1){
+               return false;
+             }
            
            if(respuesta.valor == '1'){
 

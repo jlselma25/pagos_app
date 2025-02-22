@@ -28,16 +28,19 @@ class _RegistroScreen extends State<RegistroScreen>  {
   final TextEditingController fechaControllerHasta = TextEditingController();
   final FocusNode focusNode = FocusNode();
   final FocusNode focusNodeDate = FocusNode();
-
-
+ 
+@override
+  
   @override
   void initState() {    
     super.initState();
    final registroService = Provider.of<RegistroService>(context,listen: false); 
     registroService.deleteLista(); 
       
-    // ref.read(historicoProvider.notifier).cargarHistorico();
+   
   }
+
+
 
   @override
   Widget build(BuildContext context) {
@@ -164,31 +167,108 @@ class _RegistroScreen extends State<RegistroScreen>  {
               ), 
                if (registroService.verLabel == true)  
               ...[
-               const Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                 children: [
-                   Padding(
-                     padding: EdgeInsets.symmetric(horizontal: 10),
-                     child: Text('Listado de registros' , style: TextStyle(fontSize: 20,fontWeight: FontWeight.bold,),),
-                   ),
-                 ],
-               )
+                 Row(
+                  
+                   children: [
+                  //   const Padding(
+                  //    padding: EdgeInsets.symmetric(horizontal: 10),
+                  //    child: Text('Listado de registros' , style: TextStyle(fontSize: 20,fontWeight: FontWeight.bold,),),
+                  //  ),
+                        SizedBox(width: size.width * 0.10,),    
+                      
+                      if (registroService.verLabel == true)
+                      ...[
+                            Container(                          
+                                width: size.width * 0.38,
+                                height: size.width * 0.15,
+                                decoration: BoxDecoration(
+                                  color: Colors.red.withOpacity(0.5),  // Color del fondo del contenedor
+                                  borderRadius: BorderRadius.circular(20.0),  // Bordes redondeados
+                                      ),
+                                child:  Column(
+                                  mainAxisAlignment: MainAxisAlignment.center,                       
+                                  children: [                         
+                                      const Row(
+                                        mainAxisAlignment: MainAxisAlignment.center,
+                                        children: [
+                                          Text('Total salidas' , style: TextStyle( fontSize: 16,fontWeight: FontWeight.bold,),),                                  
+                                        ],
+                                      ),
+                                
+                                    Row(
+                                        mainAxisAlignment: MainAxisAlignment.center,
+                                        children: [
+                                          Text('${registroService.totalSalidas} €' , style: const TextStyle( fontSize: 16,fontWeight: FontWeight.bold,),),                                  
+                                        ],
+                                      )
+                                    
+                                  ],
+                                )
+                                ),
+
+                          SizedBox(width: size.width * 0.05,),    
+                          Container(                          
+                                width: size.width * 0.38,
+                                height: size.width * 0.15,
+                                decoration: BoxDecoration(
+                                  color: Colors.green.withOpacity(0.6),  // Color del fondo del contenedor
+                                  borderRadius: BorderRadius.circular(20.0),  // Bordes redondeados
+                                      ),
+                                child:  Column(
+                                  mainAxisAlignment: MainAxisAlignment.center,
+                                  children: [
+                                    const Row(
+                                      mainAxisAlignment: MainAxisAlignment.center,
+                                        children: [
+                                          Text('Total entradas' , style: TextStyle( fontSize: 16,fontWeight: FontWeight.bold,),),
+                                          
+                                        ],
+                                      ),
+                                    
+                                    Row(
+                                      mainAxisAlignment: MainAxisAlignment.center,
+                                        children: [
+                                          Text('${registroService.totalEntradas} €' , style: const TextStyle( fontSize: 16,fontWeight: FontWeight.bold,),),
+                                          
+                                        ],
+                                      ),                           
+                                  ],
+                                )
+                                ),                       
+                        ],
+                   ]
+                  )
+             
+              
               ],   
           
             SizedBox(height: size.height * 0.01,),
           
             SizedBox(
                   width: double.infinity,
-                  height: size.height * 0.40,
+                  height:  size.height * 0.40,
                   child: ListView.separated(
                     physics: const BouncingScrollPhysics(),
                     itemCount: registroService.lstRegistros.length,
                     itemBuilder: (context, index) {                     
                       return Card(
-                        color: registroService.lstRegistros[index].tipo == 'I' ? Environment.color : Colors.red.withOpacity(0.4),
-                        child:  ListTile(
-                          
-                          title:  Text('${registroService.lstRegistros[index].fecha}    ${registroService.lstRegistros[index].nombre}  ' ,style: const TextStyle(color: Colors.white),),   
+                        elevation: 0.0,
+                        color: registroService.lstRegistros[index].tipo == 'I' ?  Colors.green.withOpacity(0.6) : Colors.red.withOpacity(0.5),
+                        child:  ListTile(                          
+                          title:  Text('${registroService.lstRegistros[index].fecha.toString().padRight(12,' ')}    ${registroService.lstRegistros[index].nombre.toString().padRight(14,' ')}     ${registroService.lstRegistros[index].importe.toString().padLeft(7,' ')} € ' ,style: const TextStyle(color: Colors.white),),   
+                          trailing: IconButton(
+                            onPressed: () async {
+                              final resultado = await registroService.eliminarRegistr0(index,registroService.lstRegistros[index].id);                         
+
+                              if(resultado == "0")
+                              {
+                                 showAlert2(context, 'Error al eliminar registro',Environment.proyecto);
+                                 return;
+                              }
+                           
+                            },
+                            icon: const Icon(Icons.delete, color: Colors.black,)
+                            ),
                           
                                                
                         ),
@@ -199,7 +279,10 @@ class _RegistroScreen extends State<RegistroScreen>  {
                         color: Colors.black,
                       );
                     },
-                  ))
+                  )),           
+                 
+
+                 
             ],
           ),
         ),

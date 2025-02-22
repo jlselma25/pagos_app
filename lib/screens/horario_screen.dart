@@ -1,5 +1,8 @@
 
 
+import 'dart:io';
+import 'package:flutter/foundation.dart' show kIsWeb;
+
 import 'package:flutter/material.dart';
 
 import 'package:pagos_app/global/environment.dart';
@@ -114,6 +117,7 @@ class _HorarioScreenState extends State<HorarioScreen> {
                           ),
 
                 const SizedBox( height: 55,),
+                
                    _TextUser(
                     typeKey: const TextInputType.numberWithOptions(signed: true,decimal: true),
                       readOnly: false,
@@ -121,7 +125,7 @@ class _HorarioScreenState extends State<HorarioScreen> {
                       controller: importeController,
                       obscureText: false,
                       texto: 'importe',
-                    icon: const Icon(Icons.note_add_rounded,color:Color(0xff615AAB),)
+                    icon: const Icon(Icons.money_rounded,color:Color(0xff615AAB),)
                           ),
 
 
@@ -236,9 +240,6 @@ class _FillButtonDate extends StatelessWidget {
 }
 
 
-
-
-
 class _ButtonSave extends StatelessWidget {
   const _ButtonSave({
     super.key,
@@ -261,31 +262,110 @@ class _ButtonSave extends StatelessWidget {
     return _CustomButton(
         color: Environment.color,
         texto: 'GUARDAR',
-        onTap: () async {                    
-    
-          if (selectedValue == null) {
-            showAlert(context, 'No ha seleccionado ningun tipo',
-                Environment.proyecto);
-            return;
-          }
-      
-        
-          final ok = await authService.saveRegister( selectedValue!,concepto, importe);                    
+        onTap: () async {     
+                     
+      //  if (kIsWeb) {  
+         
+      //         if (importe.isEmpty) {
+      //           await showAlert2(context, 'No ha introducido ningun importe', Environment.proyecto);             
+      //           return;
+      //         }
+
+      //         if (concepto.isEmpty) {
+      //           await showAlert2(context, 'No ha introducido concepto', Environment.proyecto);                   
+      //           return;
+      //         }
+      //          if (selectedValue == null) {
+      //           await showAlert2(context, 'No ha seleccionado ningun tipo', Environment.proyecto);                   
+      //           return;
+      //         }
+      //   } else {
+           
+      //         if (selectedValue == null) {
+      //           showAlert(context, 'No ha seleccionado ningun tipo', Environment.proyecto);
+      //           return;
+      //         }
+      //         if (importe.isEmpty) {
+      //           showAlert(context, 'No ha introducido ningun importe', Environment.proyecto);
+      //           return;
+      //         }
+
+      //         if (concepto.isEmpty) {
+      //           showAlert(context, 'No ha introducido concepto', Environment.proyecto);
+      //           return;
+      //         }
+      //     }
+        try{
+
+           final ok = await authService.saveRegister( selectedValue!,concepto, importe);                    
     
            if (ok == '0') {
-              await showAlert2( context, 'Error al guardar registro', Environment.proyecto);
-          // } else if (ok == '2') {
-          //   await showAlert2(context, 'Token incorrecto', 'Guardar partes');
-           
+              // ignore: use_build_context_synchronously
+              await showAlert2( context, 'Error al guardar registro', Environment.proyecto);       
           } else {
              await showAlert2(context, 'Registro insertado correctamente', Environment.proyecto);                 
-             Navigator.pushReplacementNamed(context, 'menu');               
+             // ignore: use_build_context_synchronously
+             Navigator.pushReplacementNamed(context, 'menu');    
            
-           }
+          }
+        }catch(error){
+          // ignore: use_build_context_synchronously
+          await showAlert2( context, 'No ha rellenado todos los campos', Environment.proyecto);
+
+        }
+         
         
         });
   }
 }
+
+
+
+
+
+class _Form extends StatefulWidget {
+  const _Form({super.key});
+
+  @override
+  State<_Form> createState() => __FormState();
+}
+
+class __FormState extends State<_Form> {
+
+  final TextEditingController importeControler = TextEditingController();
+  final TextEditingController fechaController= TextEditingController();
+  final TextEditingController conceptoController = TextEditingController();
+    
+  @override
+  Widget build(BuildContext context) {
+    final authService = Provider.of<AuthService>(context,listen: false);
+
+    return Container(
+        margin: const EdgeInsets.only(top: 40),
+        padding: const EdgeInsets.symmetric(horizontal: 50),
+        child: Column(
+          children: [
+           _TextUser(
+                    typeKey: const TextInputType.numberWithOptions(signed: true,decimal: true),
+                      readOnly: false,
+                      textField: 'importe',
+                      controller: importeControler,
+                      obscureText: false,
+                      texto: 'importeeeeee',
+                    icon: const Icon(Icons.money_rounded,color:Color(0xff615AAB),)
+                    ),
+
+           _ButtonSave(selectedValue: 1, authService: authService, importe: importeControler.text, concepto: conceptoController.text,),
+          ],
+        ),
+
+
+
+
+    );
+  }
+}
+
 
 
 
