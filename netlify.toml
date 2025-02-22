@@ -1,4 +1,4 @@
 [build]
-  command = "npm run build"  # Usar npm para ejecutar flutter build web
+  command = "bash install_flutter.sh && flutter build web"
   publish = "build/web"
 
