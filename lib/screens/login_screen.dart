@@ -95,7 +95,7 @@ class LoginScreen extends StatelessWidget {
 
                     const SizedBox(height: 20,),
                       InkWell(
-                        child: const Text('Crear usuario'),
+                        child: const Text('Crear usuarioooooooo'),
                         
                         onTap: () async {      
                             Navigator.pushReplacementNamed(context, 'registro');                      
