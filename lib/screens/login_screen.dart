@@ -48,7 +48,7 @@ class LoginScreen extends StatelessWidget {
                     Padding(
                       padding: const EdgeInsets.symmetric(horizontal: 10),
                       child: _TextUser(
-                        textField: 'email3434',
+                        textField: 'email',
                         controller: usuarioController,
                         obscureText: false,
                       ),
@@ -95,7 +95,7 @@ class LoginScreen extends StatelessWidget {
 
                     const SizedBox(height: 20,),
                       InkWell(
-                        child: const Text('Crear usuario'),
+                        child: const Text('Crear usuariooooooooooooo'),
                         
                         onTap: () async {      
                             Navigator.pushReplacementNamed(context, 'registro');                      
