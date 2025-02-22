@@ -95,7 +95,7 @@ class LoginScreen extends StatelessWidget {
 
                     const SizedBox(height: 20,),
                       InkWell(
-                        child: const Text('Crear usuarioooooooo'),
+                        child: const Text('Crear usuario'),
                         
                         onTap: () async {      
                             Navigator.pushReplacementNamed(context, 'registro');                      
@@ -103,7 +103,9 @@ class LoginScreen extends StatelessWidget {
 
                          
 
-                      )
+                      ),
+                      const SizedBox(height: 20,),
+                      Text('Version${Environment.version}',style: const TextStyle(color: Colors.black54, fontSize: 12),)
   
                     
                   ],

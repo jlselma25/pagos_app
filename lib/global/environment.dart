@@ -10,5 +10,6 @@ class Environment {
   static String codigoRegistro = '220212';
   static  Color color = const Color(0xFF1F4079);
   static String proyecto = 'Pagos app';
+  static String version = 'v.1.5';
 
 }
