@@ -68,6 +68,18 @@ class _HorarioScreenState extends State<HorarioScreen> {
 
     return Scaffold(
       // resizeToAvoidBottomInset: false,
+      backgroundColor: Colors.white,
+      appBar:  AppBar(
+        //title:  const Text('Registros'),
+        backgroundColor: Colors.white,
+        centerTitle: true,
+        leading: IconButton(
+          icon: const Icon(Icons.arrow_back_ios_new_outlined),
+          onPressed: () {          
+            Navigator.pop(context);
+          },
+        ),
+      ),
       body: SafeArea(
         child: SingleChildScrollView(
           child: Column(

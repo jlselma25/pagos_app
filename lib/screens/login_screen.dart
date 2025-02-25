@@ -24,6 +24,7 @@ class LoginScreen extends StatelessWidget {
     final authService = Provider.of<AuthService>(context);
 
     return Scaffold(
+      backgroundColor: Colors.white,     
        body: SingleChildScrollView(
         child: Column(
           
