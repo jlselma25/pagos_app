@@ -29,9 +29,19 @@ class _RegisterUserState extends State<RegisterUser> {
     final size = MediaQuery.of(context).size;   
     final authService = Provider.of<AuthService>(context,listen: false);
 
-
     return  Scaffold(
-    
+      backgroundColor: Colors.white,
+      appBar:  AppBar(
+        //title:  const Text('Registros'),
+        backgroundColor: Colors.white,
+        centerTitle: true,
+        leading: IconButton(
+          icon: const Icon(Icons.arrow_back_ios_new_outlined),
+          onPressed: () {          
+            Navigator.pop(context);
+          },
+        ),
+       ),    
       body: SafeArea(
         child: Container(
            padding: const EdgeInsets.only(top: 3,left: 40,bottom: 3,right: 40),   

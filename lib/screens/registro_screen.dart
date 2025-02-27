@@ -60,10 +60,7 @@ class _RegistroScreen extends State<RegistroScreen>  {
             Navigator.pop(context);
           },
         ),
-
-
-
-      ),
+       ),
       
         body: SingleChildScrollView(
           child: Column(
