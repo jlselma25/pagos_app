@@ -17,6 +17,18 @@ class MenuScreen extends StatelessWidget {
     
 
     return Scaffold(
+      backgroundColor: Colors.white,
+      appBar:  AppBar(
+        //title:  const Text('Registros'),
+        backgroundColor: Colors.white,
+        centerTitle: true,
+        leading: IconButton(
+          icon: const Icon(Icons.arrow_back_ios_new_outlined),
+          onPressed: () {          
+            Navigator.pop(context);
+          },
+        ),
+       ),
       floatingActionButton: FloatingActionButton(
           backgroundColor: Environment.color,
           child: const Icon(
