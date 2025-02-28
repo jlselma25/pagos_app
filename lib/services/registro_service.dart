@@ -188,9 +188,9 @@ Future obtenerSaldo () async{
                       verLabel = false;
                   }else{
                       calcularTotales();
+                     
                   }             
-                  
-                  notifyListeners();
+                  await obtenerSaldo();                 
                   return "1";
                 }    
                 

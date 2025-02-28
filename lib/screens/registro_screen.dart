@@ -283,13 +283,19 @@ class _RegistroScreen extends State<RegistroScreen>  {
                           subtitle: Text('Importe:  ${registroService.lstRegistros[index].importe} € ' ,style: const TextStyle(color: Colors.black),),   
                           trailing: IconButton(
                             onPressed: () async {
-                              final resultado = await registroService.eliminarRegistr0(index,registroService.lstRegistros[index].id);                         
 
-                              if(resultado == "0")
-                              {
-                                 showAlert2(context, 'Error al eliminar registro',Environment.proyecto);
-                                 return;
-                              }
+
+                               String? result = await showAlertConfirmar(context, 'Va a eliminar un registro, ¿está seguro?', 'Confirmación');
+
+                               if (result == 'OK'){
+                                  final resultado = await registroService.eliminarRegistr0(index,registroService.lstRegistros[index].id);                                            
+
+                                  if(resultado == "0")
+                                  {
+                                    showAlert2(context, 'Error al eliminar registro',Environment.proyecto);
+                                    return;
+                                  }
+                               }
                            
                             },
                             icon: const Icon(Icons.delete, color: Colors.black,)

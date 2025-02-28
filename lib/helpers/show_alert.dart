@@ -72,3 +72,34 @@ Future<void> showAlert(BuildContext context, String title, String subTitle) asyn
       ),
     );
   }
+
+   Future<String?> showAlertConfirmar(BuildContext context, String message, String title) async {
+    return showDialog<String>(
+      context: context,
+      builder: (BuildContext context) => AlertDialog(
+        title: Text(title),
+        content: Text(message),
+        actions: [
+          MaterialButton(  
+                  shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(20)            
+                  ),       
+                  elevation: 5,
+                  color:const Color(0xff615AAB),// Colors.blue,
+                  onPressed:() =>  Navigator.of(context).pop('OK'),// Navigator.pop(context),
+                  child: const Text('OK',style: TextStyle(color:Colors.white),),
+                  ),
+
+           MaterialButton(  
+                  shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(20)            
+                  ),       
+                  elevation: 5,
+                  color:const Color(0xff615AAB),// Colors.blue,
+                  onPressed:() =>  Navigator.of(context).pop('Cancelar'),// Navigator.pop(context),
+                  child: const Text('Cancelar',style: TextStyle(color:Colors.white),),
+                  )
+        ],
+      ),
+    );
+  }
