@@ -279,7 +279,7 @@ class _RegistroScreen extends State<RegistroScreen>  {
                         elevation: 0.0,
                         color: registroService.lstRegistros[index].tipo == 'I' ?  Colors.green.withOpacity(0.6) : Colors.red.withOpacity(0.5),
                         child:  ListTile(                          
-                          title:  Text('${registroService.lstRegistros[index].fecha.toString().padRight(12,' ')}    ${registroService.lstRegistros[index].nombre.toString().padRight(14,' ')}     ${registroService.lstRegistros[index].importe.toString().padLeft(7,' ')} € ' ,style: const TextStyle(color: Colors.white),),   
+                          title:  Text('${registroService.lstRegistros[index].fecha.toString().padRight(12,' ')}    ${registroService.lstRegistros[index].nombre.toString().padRight(14,' ')}' ,style: const TextStyle(color: Colors.white),),   
                           subtitle: Text('Importe:  ${registroService.lstRegistros[index].importe} € ' ,style: const TextStyle(color: Colors.white),),   
                           trailing: IconButton(
                             onPressed: () async {
