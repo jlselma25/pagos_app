@@ -279,8 +279,8 @@ class _RegistroScreen extends State<RegistroScreen>  {
                         elevation: 0.0,
                         color: registroService.lstRegistros[index].tipo == 'I' ?  Colors.green.withOpacity(0.6) : Colors.red.withOpacity(0.5),
                         child:  ListTile(                          
-                          title:  Text('${registroService.lstRegistros[index].fecha.toString().padRight(12,' ')}    ${registroService.lstRegistros[index].nombre.toString().padRight(14,' ')}' ,style: const TextStyle(color: Colors.white),),   
-                          subtitle: Text('Importe:  ${registroService.lstRegistros[index].importe} € ' ,style: const TextStyle(color: Colors.white),),   
+                          title:  Text('${registroService.lstRegistros[index].fecha.toString().padRight(12,' ')}    ${registroService.lstRegistros[index].nombre.toString().padRight(14,' ')}' ,style: const TextStyle(color: Colors.black),),   
+                          subtitle: Text('Importe:  ${registroService.lstRegistros[index].importe} € ' ,style: const TextStyle(color: Colors.black),),   
                           trailing: IconButton(
                             onPressed: () async {
                               final resultado = await registroService.eliminarRegistr0(index,registroService.lstRegistros[index].id);                         
