@@ -72,7 +72,7 @@ class _RegistroScreen extends State<RegistroScreen>  {
         actions:  [
           Padding(
             padding: EdgeInsets.only(right: size.width * 0.05),
-            child: Text('Saldo: ${formatoNumerico(registroService.saldoActual)} €' ,style: TextStyle(color: registroService.colors ,fontSize: 14, fontWeight: FontWeight.w600),                                
+            child: Text('Saldo: ${formatoNumerico(registroService.saldoActual)} €' ,style: TextStyle(color: registroService.colors ,fontSize: 16, fontWeight: FontWeight.w600),                                
                     ),
           )
         ],
