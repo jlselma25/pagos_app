@@ -10,8 +10,8 @@ class Logo extends StatelessWidget {
         child: Padding(
           padding: const EdgeInsets.only(top: 30),
           child: SizedBox(
-             width: size.width * 0.90,
-             height: 120,
+             width: size.width * 0.70,
+             height: 100,
               child: const _Imagen(),
             ),
         ),      
