@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:intl/intl.dart';
 import 'package:pagos_app/global/environment.dart';
 import 'package:pagos_app/helpers/comprobacion_fechas.dart';
+import 'package:pagos_app/helpers/formato_numercos.dart';
 import 'package:pagos_app/helpers/show_alert.dart';
 import 'package:pagos_app/services/registro_service.dart';
 import 'package:pagos_app/widgets/logo.dart';
@@ -34,10 +36,16 @@ class _RegistroScreen extends State<RegistroScreen>  {
   @override
   void initState() {    
     super.initState();
-   final registroService = Provider.of<RegistroService>(context,listen: false); 
-    registroService.deleteLista(); 
-      
+    final registroService = Provider.of<RegistroService>(context,listen: false); 
+    registroService.deleteLista();  
+    obtenerSaldoDelUsuario();      
    
+  }
+
+  Future<void> obtenerSaldoDelUsuario() async {    
+    final registroService = Provider.of<RegistroService>(context,listen: false); 
+    await registroService.obtenerSaldo();   
+    
   }
 
 
@@ -56,10 +64,18 @@ class _RegistroScreen extends State<RegistroScreen>  {
         centerTitle: true,
         leading: IconButton(
           icon: const Icon(Icons.arrow_back_ios_new_outlined),
-          onPressed: () {          
+          onPressed: () {       
+         
             Navigator.pop(context);
           },
         ),
+        actions:  [
+          Padding(
+            padding: EdgeInsets.only(right: size.width * 0.05),
+            child: Text('Saldo: ${formatoNumerico(registroService.saldoActual)} €' ,style: TextStyle(color: registroService.colors ,fontWeight: FontWeight.w600),                                
+                    ),
+          )
+        ],
        ),
       
         body: SingleChildScrollView(
@@ -287,9 +303,10 @@ class _RegistroScreen extends State<RegistroScreen>  {
                         color: Colors.black,
                       );
                     },
-                  )),           
+                  )
+                  ),
                  
-
+            SizedBox(height: size.height * 0.02,),
                  
             ],
           ),

@@ -1,5 +1,6 @@
 import 'package:dio/dio.dart';
 import 'package:flutter/foundation.dart';
+import 'package:flutter/material.dart';
 import 'package:pagos_app/domains/entities/registro.dart';
 import 'package:pagos_app/global/environment.dart';
 import 'package:pagos_app/models/resultado.dart';
@@ -13,18 +14,66 @@ class RegistroService  extends ChangeNotifier{
 
 
 
+
+ 
    List<Registro> lstRegistros = [];
    bool verLabel = false;
    double totalSalidas = 0;
    double totalEntradas = 0;
-  
+   double saldoActual = 0;
+   Color colors = Colors.black;
 
-
-     void deleteLista()
+    void deleteLista()
     {
       lstRegistros.clear();
       verLabel = false;
     }
+
+
+
+
+Future obtenerSaldo () async{ 
+
+
+   final token = await getToken(); 
+   final id = await getId();
+    String saldo = '0.00';
+
+   final dio = Dio(BaseOptions(
+                            baseUrl: Environment.apiUrl,
+                            headers: {
+                                        'Content-Type': 'application/json',
+                                        'x-token': token
+                                     }
+                            )
+                       );     
+
+
+      final response = await dio.get('/ObtenerSaldo/',
+              queryParameters: {
+                                  'usuario':id,                          
+                                });
+
+
+      if (response.statusCode == 200){
+        saldoActual = response.data; 
+           if (saldoActual < 0){
+               colors = Colors.red;
+           }else{
+               colors = Colors.green;
+           }  
+        notifyListeners();
+      }
+
+
+       print(saldoActual);
+
+      
+}
+  
+
+
+
 
  Future<String> cargarRegistros (String dateFrom, String dateTo) async{ 
 
@@ -58,7 +107,7 @@ class RegistroService  extends ChangeNotifier{
       if (response.statusCode == 200){
 
         lstRegistros = registrosFromJsonList(response.data);   
-        notifyListeners();
+       
 
         if (lstRegistros.isEmpty) 
         {
@@ -80,9 +129,19 @@ class RegistroService  extends ChangeNotifier{
           }
 
            totalSalidas= double.parse( totalSalidas.toStringAsFixed(2));
-           totalEntradas= double.parse( totalEntradas.toStringAsFixed(2));        
+           totalEntradas= double.parse( totalEntradas.toStringAsFixed(2));    
+
+           saldoActual = double.parse(  (totalEntradas - totalSalidas).toStringAsFixed(2)); 
+
+           if (saldoActual < 0){
+               colors = Colors.red;
+           }else{
+               colors = Colors.green;
+           }
+            
 
 
+        notifyListeners();
         return '1';       
      }  
 
