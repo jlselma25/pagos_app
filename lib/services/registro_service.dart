@@ -41,10 +41,7 @@ Future obtenerSaldo () async{
 
    final dio = Dio(BaseOptions(
                             baseUrl: Environment.apiUrl,
-                            headers: {
-                                        'Content-Type': 'application/json',
-                                        'x-token': token
-                                     }
+                           
                             )
                        );     
 

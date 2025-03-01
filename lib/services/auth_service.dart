@@ -3,7 +3,6 @@
 
 
 import 'package:dio/dio.dart';
-import 'package:dio/io.dart';
 import 'package:flutter/foundation.dart';
 import 'package:pagos_app/domains/entities/usuario.dart';
 import 'package:pagos_app/global/environment.dart';
@@ -254,7 +253,18 @@ Future<bool> isLogged()async{
 
   Future<bool> comprobarToken ( )async{      
 
-    final response = await dio.get('/ComprobarToken/' );                                      
+
+      String token = await getToken();
+     
+      final dio2 = Dio(BaseOptions(
+                            baseUrl: Environment.apiUrl,
+                            headers: {
+                                        'Content-Type': 'application/json',
+                                        'x-token': token
+                                     }
+                            )
+                       );
+    final response = await dio2.get('/ComprobarToken/' );                                      
 
      if (response.statusCode == 200){
             final respuesta = Resultado.fromJson(response.data);
