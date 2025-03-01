@@ -112,11 +112,9 @@ Future obtenerSaldo () async{
         if (lstRegistros.isEmpty) 
         {
              return '2';
-        }         
+        }   
 
-       if (lstRegistros[0].token == '3'){
-          return '3';
-       }
+   
         verLabel = true;
 
          for (int i = 0; i < lstRegistros.length; i++) {
@@ -129,16 +127,7 @@ Future obtenerSaldo () async{
           }
 
            totalSalidas= double.parse( totalSalidas.toStringAsFixed(2));
-           totalEntradas= double.parse( totalEntradas.toStringAsFixed(2));    
-
-          //  saldoActual = double.parse(  (totalEntradas - totalSalidas).toStringAsFixed(2)); 
-
-          //  if (saldoActual < 0){
-          //      colors = Colors.red;
-          //  }else{
-          //      colors = Colors.green;
-          //  }
-            
+           totalEntradas= double.parse( totalEntradas.toStringAsFixed(2));             
 
 
         notifyListeners();

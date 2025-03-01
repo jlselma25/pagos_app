@@ -169,16 +169,9 @@ class _RegistroScreen extends State<RegistroScreen>  {
                             if (ok == '2')
                             {
                                  // ignore: use_build_context_synchronously
-                                 await showAlert2( context, 'No existe ningun registro en ese periódo', Environment.proyecto);
-                                
+                                 await showAlert2( context, 'No existe ningun registro en ese periódo', Environment.proyecto);                                
                                  return;
-                            }
-                            if (ok == '3')
-                            {
-                                 await showAlert2( context, 'Token no válido necesita iniciar sesión de nuevo', Environment.proyecto);
-                                  Navigator.pushNamed(context, 'login');    
-                                 return;
-                            }
+                            }                      
 
 
                           }, 

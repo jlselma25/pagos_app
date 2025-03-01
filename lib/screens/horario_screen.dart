@@ -313,7 +313,8 @@ class _ButtonSave extends StatelessWidget {
     
            if (ok == '0') {
               // ignore: use_build_context_synchronously
-              await showAlert2( context, 'Error al guardar registro', Environment.proyecto);       
+              await showAlert2( context, 'Error al guardar registro ', Environment.proyecto);  
+                  
           } else {
              await showAlert2(context, 'Registro insertado correctamente', Environment.proyecto);                 
              // ignore: use_build_context_synchronously

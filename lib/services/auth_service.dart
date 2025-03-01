@@ -206,21 +206,6 @@ class AuthService extends ChangeNotifier{
 
 
 Future<bool> isLogged()async{  
-  
-    String token = await getToken(); 
-   
-
-    print(token);
-  
-  
-    final dio2 = Dio(BaseOptions(
-                            baseUrl: Environment.apiUrl,
-                            headers: {
-                                        'Content-Type': 'application/json',
-                                        'x-token': token
-                                     }
-                            )
-                       );
 
 
      // Configura el adaptador para ignorar certificados autofirmados
@@ -232,14 +217,9 @@ Future<bool> isLogged()async{
 //         client.badCertificateCallback = (cert, host, port) => true;
 //         return null; // Solo para desarrollo
 //       };
-//  }
- 
+//  } 
 
-    final response = await dio2.get('/ComprobarUsuario/',
-                                      //  queryParameters: {
-                                      //    'dni':'34',              
-                                      //  }
-                                       );
+    final response = await dio.get('/ComprobarUsuario/');
                                       
 
      if (response.statusCode == 200){
@@ -270,6 +250,28 @@ Future<bool> isLogged()async{
     // await prefs.remove('id');
     await prefs.clear();
   }
+
+
+  Future<bool> comprobarToken ( )async{      
+
+    final response = await dio.get('/ComprobarToken/' );                                      
+
+     if (response.statusCode == 200){
+            final respuesta = Resultado.fromJson(response.data);
+            
+        if (respuesta.valor == '1')
+        {
+             return true;    
+        }else{
+          return false;
+        }            
+            
+      }
+          
+      else{      
+        return false;     
+      }     
+}
 
 }
 

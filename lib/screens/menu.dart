@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 
 import 'package:pagos_app/global/environment.dart';
+import 'package:pagos_app/helpers/show_alert.dart';
 import 'package:pagos_app/services/auth_service.dart';
 import 'package:pagos_app/widgets/custom_button.dart';
 import 'package:pagos_app/widgets/logo.dart';
@@ -56,7 +57,15 @@ class MenuScreen extends StatelessWidget {
                       color: Environment.color,
                       texto: '         CREAR REGISTRO         ',
                       onTap: ()  async {
-                         Navigator.pushNamed(context, 'horario');                 
+                        final ok = await authService.comprobarToken();
+                        if (ok) {
+                          Navigator.pushNamed(context, 'horario'); 
+                        }else{
+                          await showAlert2( context, 'Error toekn no válido ', Environment.proyecto);  
+                           Navigator.pushReplacementNamed(context, 'login'); 
+                        }
+                           
+                                         
                       },
                     ),
                   ),
@@ -71,7 +80,14 @@ class MenuScreen extends StatelessWidget {
                 color: Environment.color,
                 texto: '         LISTADOS REGISTROS ',
                 onTap: () async{
-                   Navigator.pushNamed(context, 'listado');    
+                  final ok = await authService.comprobarToken();
+                        if (ok) {
+                           Navigator.pushNamed(context, 'listado');   
+                        }else{
+                          await showAlert2( context, 'Error token no válido ', Environment.proyecto);  
+                           Navigator.pushReplacementNamed(context, 'login'); 
+                        }
+                   
                 },
               ),
             ),
