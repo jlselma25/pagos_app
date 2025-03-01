@@ -47,11 +47,14 @@ class LoadingScreen extends StatelessWidget {
 
   final tipos = await authService.prueba();
 
-  showAlert(context, tipos,Environment.proyecto);
  
-  // if(tipos.isNotEmpty){
-  //     Navigator.pushReplacementNamed(context, 'login');  
-  // }
+ 
+  if(tipos.isNotEmpty){
+      Navigator.pushReplacementNamed(context, 'login');  
+  }
+  else{
+     Navigator.pushReplacementNamed(context, 'prueba');  
+  }
 
 //     Future.delayed(const Duration(seconds: 5), () {
 //        Navigator.pushReplacementNamed(context, 'login');  
