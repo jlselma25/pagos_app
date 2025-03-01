@@ -35,7 +35,7 @@ class AuthService extends ChangeNotifier{
       final dio = Dio(BaseOptions(
       baseUrl: Environment.apiUrl,
       headers: {
-          'x-token': LocalStorage.prefs.getString('token') ?? ''
+          'x-token': LocalStorage.prefs.getString('action') ?? ''
   }
       )   
    
@@ -46,7 +46,7 @@ class AuthService extends ChangeNotifier{
 
     Future<String> getToken() async {
      final SharedPreferences prefs  =  await SharedPreferences.getInstance();
-     final  token = prefs.getString('token');        
+     final  token = prefs.getString('action');        
      return token ?? '';
   }
 
