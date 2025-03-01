@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+
 import 'package:pagos_app/helpers/show_alert.dart';
 import 'package:pagos_app/services/auth_service.dart';
 import 'package:provider/provider.dart';
@@ -20,6 +21,8 @@ class PruebaScreen extends StatelessWidget {
 
       final id = await  authService.getId();
       final token = await authService.getToken();
+     
+      
 
       showAlert2(context, id .toString() +'token ' +  token , 'Preuba');
       }

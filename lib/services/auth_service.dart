@@ -3,11 +3,14 @@
 
 
 import 'package:dio/dio.dart';
+import 'package:dio/io.dart';
+import 'package:flutter/foundation.dart';
 
 import 'package:flutter/widgets.dart';
+import 'package:localstorage/localstorage.dart';
 import 'package:pagos_app/domains/entities/usuario.dart';
 import 'package:pagos_app/global/environment.dart';
-import 'package:pagos_app/helpers/show_alert.dart';
+
 import 'package:pagos_app/models/resultado.dart';
 import 'package:pagos_app/models/tipos.dart';
 import 'package:pagos_app/services/local_storage.dart';
@@ -34,27 +37,45 @@ class AuthService extends ChangeNotifier{
   
  
 
-   final dio = Dio(BaseOptions(
+  //  final dio = Dio(BaseOptions(
+  //     baseUrl: Environment.apiUrl,
+  //     headers: {
+  //         'x-token': LocalStorage.prefs.getString('token') ?? ''
+  // }
+  //     )   
+   
+
+  //     );
+
+
+      final dio = Dio(BaseOptions(
       baseUrl: Environment.apiUrl,
       headers: {
-          'x-token': LocalStorage.prefs.getString('token') ?? ''
+          'x-token': localStorage.getItem('token') ?? ''
   }
       )   
    
 
       );
 
+
     Future<String> getToken() async {
-     final SharedPreferences prefs  =  await SharedPreferences.getInstance();
-     final  token = prefs.getString('token');   
+    //  final SharedPreferences prefs  =  await SharedPreferences.getInstance();
+    //  final  token = prefs.getString('token');   
+
+      final  token = localStorage.getItem('token');
      return token ?? '';
   }
 
-   Future<int> getId() async {
-     final SharedPreferences prefs  =  await SharedPreferences.getInstance();
-     final  id = prefs.getInt('id');   
-     return id ?? -1;
+   Future<String> getId() async {
+    //  final SharedPreferences prefs  =  await SharedPreferences.getInstance();
+    //  final  id = prefs.getInt('id');   
+     final  id = localStorage.getItem('id');
+     return id ?? '-1';
   }
+
+
+  
 
 
 
@@ -153,11 +174,15 @@ class AuthService extends ChangeNotifier{
   }
 
   Future<void> saveToken(String token  ) async {
-    await LocalStorage.prefs.setString('token',token);           
+  //  await LocalStorage.prefs.setString('token',token);     
+
+    localStorage.setItem('token', token)   ;   
   }
 
   Future<void> saveId(int id  ) async {    
-    await LocalStorage.prefs.setInt('id',id);     
+   // await LocalStorage.prefs.setInt('id',id); 
+
+    localStorage.setItem('id', id.toString());       
   }
 
 
@@ -165,7 +190,7 @@ class AuthService extends ChangeNotifier{
   Future<String> saveRegister ( int tipo,  String concpeto, String importe )async{   
 
         String token = await getToken();
-        int id = await getId();
+        String id = await getId();
 
        final dio2 = Dio(BaseOptions(
                             baseUrl: Environment.apiUrl,
@@ -181,7 +206,7 @@ class AuthService extends ChangeNotifier{
                                   'tipo':tipo,
                                   'importe':importe,
                                   'concepto': concpeto,   
-                                  'id': id,   
+                                  'id': int.parse(id)   
                                                                
 
                                 });
@@ -195,6 +220,72 @@ class AuthService extends ChangeNotifier{
       return '0';
      }
 }
+
+
+
+Future<bool> isLogged()async{  
+  
+    String token = await getToken(); 
+   
+
+    print(token);
+  
+  
+    final dio2 = Dio(BaseOptions(
+                            baseUrl: Environment.apiUrl,
+                            headers: {
+                                        'Content-Type': 'application/json',
+                                        'x-token': token
+                                     }
+                            )
+                       );
+
+
+     // Configura el adaptador para ignorar certificados autofirmados
+
+ if (defaultTargetPlatform == TargetPlatform.android ||
+      defaultTargetPlatform == TargetPlatform.iOS) {
+      
+      (dio2.httpClientAdapter as IOHttpClientAdapter).onHttpClientCreate = (client) {
+        client.badCertificateCallback = (cert, host, port) => true;
+        return null; // Solo para desarrollo
+      };
+ }
+ 
+
+    final response = await dio2.get('/ComprobarUsuario/',
+                                      //  queryParameters: {
+                                      //    'dni':'34',              
+                                      //  }
+                                       );
+                                      
+
+     if (response.statusCode == 200){
+            final respuesta = Resultado.fromJson(response.data);
+
+            
+        if (respuesta.valor == '1')
+        {
+             return true;    
+        }else{
+          return false;
+        }            
+            
+      }
+          
+      else{
+        logOut();
+        return false;     
+      }     
+
+
+     
+   }
+
+  Future<void> logOut() async{
+    final SharedPreferences prefs  =  await SharedPreferences.getInstance();
+    await prefs.remove('action');   
+  }
 
 }
 

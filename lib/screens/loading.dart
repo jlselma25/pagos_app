@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:pagos_app/global/environment.dart';
 import 'package:pagos_app/helpers/show_alert.dart';
+import 'package:pagos_app/screens/login_screen.dart';
+import 'package:pagos_app/screens/prueba.dart';
 import 'package:pagos_app/services/auth_service.dart';
 import 'package:provider/provider.dart';
 
@@ -45,16 +47,19 @@ class LoadingScreen extends StatelessWidget {
 
   /////final tipos = await authService.cargarTipos();
 
-  final tipos = await authService.prueba();
+  final ok = await authService.isLogged(); 
+ 
+  if(ok){
+      Navigator.pushReplacementNamed(context, 'menu');  
+  }else{
+      Navigator.pushReplacement(context, 
+              PageRouteBuilder(
+                pageBuilder: (_,__,___) =>  LoginScreen()
+              )
+        
+          );
+  }
 
- 
- 
-  if(!tipos.isNotEmpty){
-      Navigator.pushReplacementNamed(context, 'login');  
-  }
-  else{
-     Navigator.pushReplacementNamed(context, 'prueba');  
-  }
 
 //     Future.delayed(const Duration(seconds: 5), () {
 //        Navigator.pushReplacementNamed(context, 'login');  
