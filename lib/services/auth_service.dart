@@ -5,9 +5,6 @@
 import 'package:dio/dio.dart';
 import 'package:dio/io.dart';
 import 'package:flutter/foundation.dart';
-
-import 'package:flutter/widgets.dart';
-import 'package:localstorage/localstorage.dart';
 import 'package:pagos_app/domains/entities/usuario.dart';
 import 'package:pagos_app/global/environment.dart';
 
@@ -32,46 +29,32 @@ class AuthService extends ChangeNotifier{
 
   error() {   
     notifyListeners();
-  }
+  }  
  
-  
  
-
-  //  final dio = Dio(BaseOptions(
-  //     baseUrl: Environment.apiUrl,
-  //     headers: {
-  //         'x-token': LocalStorage.prefs.getString('token') ?? ''
-  // }
-  //     )   
-   
-
-  //     );
-
-
       final dio = Dio(BaseOptions(
       baseUrl: Environment.apiUrl,
       headers: {
-          'x-token': localStorage.getItem('token') ?? ''
+          'x-token': LocalStorage.prefs.getString('token') ?? ''
   }
       )   
    
 
       );
 
+     
 
     Future<String> getToken() async {
-    //  final SharedPreferences prefs  =  await SharedPreferences.getInstance();
-    //  final  token = prefs.getString('token');   
-
-      final  token = localStorage.getItem('token');
+     final SharedPreferences prefs  =  await SharedPreferences.getInstance();
+     final  token = prefs.getString('token');        
      return token ?? '';
   }
 
-   Future<String> getId() async {
-    //  final SharedPreferences prefs  =  await SharedPreferences.getInstance();
-    //  final  id = prefs.getInt('id');   
-     final  id = localStorage.getItem('id');
-     return id ?? '-1';
+   Future<int> getId() async {
+     final SharedPreferences prefs  =  await SharedPreferences.getInstance();
+     final  id = prefs.getInt('id');   
+   
+     return id ?? -1;
   }
 
 
@@ -87,8 +70,7 @@ class AuthService extends ChangeNotifier{
        return id.toString()+ token;  
  }
 
-    Future <Map<int, String>> cargarTipos() async {   
-
+    Future <Map<int, String>> cargarTipos() async { 
       
      final response = await dio.get('/CargarTipos/' );      
      List<Tipos> listaTipos = tiposFromJsonList(response.data);
@@ -151,7 +133,8 @@ class AuthService extends ChangeNotifier{
 
    Future<String>register(String email,String pass,String codigo)  async{    
 
-    if (codigo == Environment.codigoRegistro){
+    if (codigo == Environment.codigoRegistro){   
+
 
       final response = await dio.get('/RegistroUsuario/',
                                         queryParameters: {
@@ -174,15 +157,14 @@ class AuthService extends ChangeNotifier{
   }
 
   Future<void> saveToken(String token  ) async {
-  //  await LocalStorage.prefs.setString('token',token);     
-
-    localStorage.setItem('token', token)   ;   
+      final SharedPreferences prefs  =  await SharedPreferences.getInstance();
+     await prefs.setString('action', token);   
+            
   }
 
   Future<void> saveId(int id  ) async {    
-   // await LocalStorage.prefs.setInt('id',id); 
-
-    localStorage.setItem('id', id.toString());       
+    final SharedPreferences prefs  =  await SharedPreferences.getInstance();
+     await prefs.setInt('id', id);             
   }
 
 
@@ -190,7 +172,7 @@ class AuthService extends ChangeNotifier{
   Future<String> saveRegister ( int tipo,  String concpeto, String importe )async{   
 
         String token = await getToken();
-        String id = await getId();
+        int id = await getId();
 
        final dio2 = Dio(BaseOptions(
                             baseUrl: Environment.apiUrl,
@@ -206,7 +188,7 @@ class AuthService extends ChangeNotifier{
                                   'tipo':tipo,
                                   'importe':importe,
                                   'concepto': concpeto,   
-                                  'id': int.parse(id)   
+                                  'id': id   
                                                                
 
                                 });
