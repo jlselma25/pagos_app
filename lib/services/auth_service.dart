@@ -225,14 +225,14 @@ Future<bool> isLogged()async{
 
      // Configura el adaptador para ignorar certificados autofirmados
 
- if (defaultTargetPlatform == TargetPlatform.android ||
-      defaultTargetPlatform == TargetPlatform.iOS) {
+//  if (defaultTargetPlatform == TargetPlatform.android ||
+//       defaultTargetPlatform == TargetPlatform.iOS) {
       
-      (dio2.httpClientAdapter as IOHttpClientAdapter).onHttpClientCreate = (client) {
-        client.badCertificateCallback = (cert, host, port) => true;
-        return null; // Solo para desarrollo
-      };
- }
+//       (dio2.httpClientAdapter as IOHttpClientAdapter).onHttpClientCreate = (client) {
+//         client.badCertificateCallback = (cert, host, port) => true;
+//         return null; // Solo para desarrollo
+//       };
+//  }
  
 
     final response = await dio2.get('/ComprobarUsuario/',
