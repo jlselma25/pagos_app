@@ -266,7 +266,9 @@ Future<bool> isLogged()async{
 
   Future<void> logOut() async{
     final SharedPreferences prefs  =  await SharedPreferences.getInstance();
-    await prefs.remove('action');   
+    // await prefs.remove('token');   
+    // await prefs.remove('id');
+    await prefs.clear();
   }
 
 }

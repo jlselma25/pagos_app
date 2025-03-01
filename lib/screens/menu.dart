@@ -37,7 +37,7 @@ class MenuScreen extends StatelessWidget {
           ),
           onPressed: () {
             Navigator.pushReplacementNamed(context, 'login');           
-         //   authService.logOut();
+            authService.logOut();
           }),
       body: SingleChildScrollView(
         child: Column(
