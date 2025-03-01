@@ -131,13 +131,13 @@ Future obtenerSaldo () async{
            totalSalidas= double.parse( totalSalidas.toStringAsFixed(2));
            totalEntradas= double.parse( totalEntradas.toStringAsFixed(2));    
 
-           saldoActual = double.parse(  (totalEntradas - totalSalidas).toStringAsFixed(2)); 
+          //  saldoActual = double.parse(  (totalEntradas - totalSalidas).toStringAsFixed(2)); 
 
-           if (saldoActual < 0){
-               colors = Colors.red;
-           }else{
-               colors = Colors.green;
-           }
+          //  if (saldoActual < 0){
+          //      colors = Colors.red;
+          //  }else{
+          //      colors = Colors.green;
+          //  }
             
 
 
