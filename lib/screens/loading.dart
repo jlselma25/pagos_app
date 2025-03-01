@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:pagos_app/global/environment.dart';
+import 'package:pagos_app/helpers/show_alert.dart';
 import 'package:pagos_app/services/auth_service.dart';
 import 'package:provider/provider.dart';
 
@@ -42,11 +43,15 @@ class LoadingScreen extends StatelessWidget {
  Future checkLoginState(BuildContext context) async {
   final authService = Provider.of<AuthService>(context, listen: false);
 
-  final tipos = await authService.cargarTipos();
+  /////final tipos = await authService.cargarTipos();
+
+  final tipos = await authService.prueba();
+
+  showAlert(context, tipos,Environment.proyecto);
  
-  if(tipos.isNotEmpty){
-      Navigator.pushReplacementNamed(context, 'login');  
-  }
+  // if(tipos.isNotEmpty){
+  //     Navigator.pushReplacementNamed(context, 'login');  
+  // }
 
 //     Future.delayed(const Duration(seconds: 5), () {
 //        Navigator.pushReplacementNamed(context, 'login');  

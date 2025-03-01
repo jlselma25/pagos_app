@@ -7,6 +7,7 @@ import 'package:dio/dio.dart';
 import 'package:flutter/widgets.dart';
 import 'package:pagos_app/domains/entities/usuario.dart';
 import 'package:pagos_app/global/environment.dart';
+import 'package:pagos_app/helpers/show_alert.dart';
 import 'package:pagos_app/models/resultado.dart';
 import 'package:pagos_app/models/tipos.dart';
 import 'package:pagos_app/services/local_storage.dart';
@@ -57,8 +58,17 @@ class AuthService extends ChangeNotifier{
 
 
 
-    Future <Map<int, String>> cargarTipos() async {
+ Future <String> prueba() async {
 
+    final  id = await getId();
+       final token =await getToken(); 
+
+       return id.toString()+ token;  
+ }
+
+    Future <Map<int, String>> cargarTipos() async {   
+
+      
      final response = await dio.get('/CargarTipos/' );      
      List<Tipos> listaTipos = tiposFromJsonList(response.data);
      Map<int, String> tipoMap = {};    
