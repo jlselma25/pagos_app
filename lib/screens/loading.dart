@@ -49,7 +49,7 @@ class LoadingScreen extends StatelessWidget {
 
  
  
-  if(tipos.isNotEmpty){
+  if(!tipos.isNotEmpty){
       Navigator.pushReplacementNamed(context, 'login');  
   }
   else{
