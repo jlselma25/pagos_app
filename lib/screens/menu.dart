@@ -24,7 +24,7 @@ class _MenuScreenState extends State<MenuScreen> {
   @override
   Widget build(BuildContext context) {
     final size = MediaQuery.of(context).size;
-    final authService = Provider.of<AuthService>(context, listen: true);
+    final authService = Provider.of<AuthService>(context, listen: false);
   
     
 

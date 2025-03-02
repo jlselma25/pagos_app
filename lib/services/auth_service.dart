@@ -57,6 +57,12 @@ class AuthService extends ChangeNotifier{
      return id ?? -1;
   }
 
+   Future<String> getUser() async {
+     final SharedPreferences prefs  =  await SharedPreferences.getInstance();
+     final  user = prefs.getString('user');        
+     return user ?? '';
+  }
+
 
   
 
@@ -119,8 +125,9 @@ class AuthService extends ChangeNotifier{
             if (respuesta.token.isNotEmpty){
               saveToken(respuesta.token);
               saveId(respuesta.id);
+              saveUser(email);
               usuario = email;
-              notifyListeners();
+             
             }
 
             return true;
@@ -160,15 +167,17 @@ class AuthService extends ChangeNotifier{
 
   Future<void> saveToken(String token  ) async {
       final SharedPreferences prefs  =  await SharedPreferences.getInstance();
-     await prefs.setString('action', token);   
-            
+     await prefs.setString('action', token);              
   }
 
   Future<void> saveId(int id  ) async {    
     final SharedPreferences prefs  =  await SharedPreferences.getInstance();
      await prefs.setInt('id', id);             
   }
-
+ Future<void> saveUser(String user ) async {    
+    final SharedPreferences prefs  =  await SharedPreferences.getInstance();
+     await prefs.setString('user', user);             
+  }
 
 
   Future<String> saveRegister ( int tipo,  String concpeto, String importe )async{   
@@ -230,6 +239,7 @@ Future<bool> isLogged()async{
             
         if (respuesta.valor == '1')
         {
+             
              return true;    
         }else{
           return false;
