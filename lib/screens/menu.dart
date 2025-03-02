@@ -24,7 +24,7 @@ class _MenuScreenState extends State<MenuScreen> {
   @override
   Widget build(BuildContext context) {
     final size = MediaQuery.of(context).size;
-   final authService = Provider.of<AuthService>(context, listen: false);
+    final authService = Provider.of<AuthService>(context, listen: true);
   
     
 
@@ -117,6 +117,9 @@ class _MenuScreenState extends State<MenuScreen> {
             SizedBox(height: size.height * 0.03),
            
             SizedBox(height: size.height * 0.10,),   
+            
+
+
             if (isLoading) 
                 Column(
                   mainAxisAlignment: MainAxisAlignment.center,
@@ -133,7 +136,9 @@ class _MenuScreenState extends State<MenuScreen> {
                   ],
                 ),
         
-           // Text(authService.usuario.nombre), 
+
+            SizedBox(height: size.height * 0.10,),   
+            Text(authService.usuario), 
               
                 
              

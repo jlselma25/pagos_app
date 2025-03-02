@@ -4,7 +4,7 @@
 
 import 'package:dio/dio.dart';
 import 'package:flutter/foundation.dart';
-import 'package:pagos_app/domains/entities/usuario.dart';
+
 import 'package:pagos_app/global/environment.dart';
 
 import 'package:pagos_app/models/resultado.dart';
@@ -16,9 +16,10 @@ import 'package:shared_preferences/shared_preferences.dart';
 
 class AuthService extends ChangeNotifier{
 
-  late Usuario usuario; 
+
   bool _comprobando = false;
 
+  String usuario ='';
   bool get comprobando => _comprobando;
 
   set comprobando(bool value) {
@@ -118,6 +119,8 @@ class AuthService extends ChangeNotifier{
             if (respuesta.token.isNotEmpty){
               saveToken(respuesta.token);
               saveId(respuesta.id);
+              usuario = email;
+              notifyListeners();
             }
 
             return true;
