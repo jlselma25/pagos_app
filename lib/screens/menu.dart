@@ -8,8 +8,18 @@ import 'package:pagos_app/widgets/logo.dart';
 
 import 'package:provider/provider.dart';
 
-class MenuScreen extends StatelessWidget {
+class MenuScreen extends StatefulWidget {
   const MenuScreen();
+
+  @override
+  State<MenuScreen> createState() => _MenuScreenState();
+}
+
+class _MenuScreenState extends State<MenuScreen> {
+
+
+   bool isLoading = false;
+
   @override
   Widget build(BuildContext context) {
     final size = MediaQuery.of(context).size;
@@ -57,6 +67,10 @@ class MenuScreen extends StatelessWidget {
                       color: Environment.color,
                       texto: '         CREAR REGISTRO         ',
                       onTap: ()  async {
+
+                        setState(() {
+                          isLoading = true;
+                        });
                         final ok = await authService.comprobarToken();
                         if (ok) {
                           Navigator.pushNamed(context, 'horario'); 
@@ -64,6 +78,10 @@ class MenuScreen extends StatelessWidget {
                           await showAlert2( context, 'Error toekn no válido ', Environment.proyecto);  
                            Navigator.pushReplacementNamed(context, 'login'); 
                         }
+
+                         setState(() {
+                          isLoading = false;
+                        });
                            
                                          
                       },
@@ -71,6 +89,13 @@ class MenuScreen extends StatelessWidget {
                   ),
                 ],
               ),
+
+              if (isLoading) 
+                const Padding(
+                  padding: EdgeInsets.all(8.0),
+                  child: LinearProgressIndicator(),
+                ),
+
             
             SizedBox(height: size.height * 0.03),
         
