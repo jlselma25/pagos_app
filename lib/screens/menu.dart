@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_spinkit/flutter_spinkit.dart';
 
 import 'package:pagos_app/global/environment.dart';
 import 'package:pagos_app/helpers/show_alert.dart';
@@ -88,14 +89,7 @@ class _MenuScreenState extends State<MenuScreen> {
                     ),
                   ),
                 ],
-              ),
-
-              if (isLoading) 
-                const Padding(
-                  padding: EdgeInsets.all(8.0),
-                  child: LinearProgressIndicator(),
-                ),
-
+              ),            
             
             SizedBox(height: size.height * 0.03),
         
@@ -120,7 +114,23 @@ class _MenuScreenState extends State<MenuScreen> {
            
            
            
-            SizedBox(height: size.height * 0.10,),           
+            SizedBox(height: size.height * 0.10,),   
+            if (isLoading) 
+                Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [                   
+                    Padding(
+                      padding: EdgeInsets.all(8.0),
+                      child: SpinKitCircle(
+                      color: Environment.color,  // El color del spinner
+                      size: 50.0,          // Tamaño del spinner
+                    ),                   
+                    ),
+                    const SizedBox(height: 15),
+                    const Text('Cargando...'),
+                  ],
+                ),
+        
            // Text(authService.usuario.nombre), 
               
                 
