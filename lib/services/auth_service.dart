@@ -239,7 +239,7 @@ Future<bool> isLogged()async{
             
         if (respuesta.valor == '1')
         {
-             
+             usuario = await getUser();
              return true;    
         }else{
           return false;
