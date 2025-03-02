@@ -99,20 +99,22 @@ class _MenuScreenState extends State<MenuScreen> {
                 color: Environment.color,
                 texto: '         LISTADOS REGISTROS ',
                 onTap: () async{
-                  final ok = await authService.comprobarToken();
-                        if (ok) {
-                           Navigator.pushNamed(context, 'listado');   
-                        }else{
-                          await showAlert2( context, 'Error token no válido ', Environment.proyecto);  
-                           Navigator.pushReplacementNamed(context, 'login'); 
-                        }
-                   
+                  
+                   setState(() {isLoading = true;});
+
+                   final ok = await authService.comprobarToken();
+
+                   if (ok) {
+                    Navigator.pushNamed(context, 'listado');   
+                   }else{
+                    await showAlert2( context, 'Error token no válido ', Environment.proyecto);  
+                    Navigator.pushReplacementNamed(context, 'login'); 
+                  }
+                  setState(() {isLoading = false;});
                 },
               ),
             ),
             SizedBox(height: size.height * 0.03),
-           
-           
            
             SizedBox(height: size.height * 0.10,),   
             if (isLoading) 
