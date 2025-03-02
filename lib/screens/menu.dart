@@ -40,6 +40,12 @@ class _MenuScreenState extends State<MenuScreen> {
             Navigator.pop(context);
           },
         ),
+        actions: [
+           Padding(
+             padding: EdgeInsets.only(right: size.width  * 0.03),
+             child: Text( 'sesion: ${authService.usuario}',style: const TextStyle(color:Colors.black87),),
+           ), 
+        ],
        ),
       floatingActionButton: FloatingActionButton(
           backgroundColor: Environment.color,
@@ -137,8 +143,8 @@ class _MenuScreenState extends State<MenuScreen> {
                 ),
         
 
-            SizedBox(height: size.height * 0.10,),   
-            Text(authService.usuario), 
+           
+           
               
                 
              
