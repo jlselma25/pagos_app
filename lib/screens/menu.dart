@@ -72,7 +72,7 @@ class _MenuScreenState extends State<MenuScreen> {
                     width: size.width * 0.74,
                     child: CustomButton(
                       color: Environment.color,
-                      texto: '         CREAR REGISTRO         ',
+                      texto: '         CREAR APUNTE         ',
                       onTap: ()  async {
 
                         setState(() {
@@ -103,7 +103,7 @@ class _MenuScreenState extends State<MenuScreen> {
                width: size.width * 0.74,
               child: CustomButton(
                 color: Environment.color,
-                texto: '         LISTADOS REGISTROS ',
+                texto: '         LISTADOS APUNTES ',
                 onTap: () async{
                   
                    setState(() {isLoading = true;});
