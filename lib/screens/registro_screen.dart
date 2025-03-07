@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:intl/intl.dart';
+import 'package:pagos_app/domains/entities/registro.dart';
 import 'package:pagos_app/global/environment.dart';
 import 'package:pagos_app/helpers/comprobacion_fechas.dart';
 import 'package:pagos_app/helpers/formato_numercos.dart';
+import 'package:pagos_app/helpers/generar_pdf.dart';
 import 'package:pagos_app/helpers/show_alert.dart';
 import 'package:pagos_app/services/registro_service.dart';
 import 'package:pagos_app/widgets/logo.dart';
@@ -30,6 +31,7 @@ class _RegistroScreen extends State<RegistroScreen>  {
   final TextEditingController fechaControllerHasta = TextEditingController();
   final FocusNode focusNode = FocusNode();
   final FocusNode focusNodeDate = FocusNode();
+  List<Registro> lstRegistros = [];
  
 @override
   
@@ -70,6 +72,7 @@ class _RegistroScreen extends State<RegistroScreen>  {
           },
         ),
         actions:  [
+        
           Padding(
             padding: EdgeInsets.only(right: size.width * 0.05),
             child: Text('Saldo: ${formatoNumerico(registroService.saldoActual)} €' ,style: TextStyle(color: registroService.colors ,fontSize: 16, fontWeight: FontWeight.w600),                                
@@ -173,10 +176,26 @@ class _RegistroScreen extends State<RegistroScreen>  {
                                  return;
                             }                      
 
+                              lstRegistros =  registroService.lstRegistros;
 
                           }, 
                           child:const  Icon(Icons.refresh_rounded)
                         ) ,
+
+                        SizedBox(width: size.width * 0.02,),          
+                        FilledButton(
+                          
+                          style: FilledButton.styleFrom(backgroundColor: Environment.color,),                          
+                          onPressed: () async{     
+                            _showBottomSheet(context);
+
+                                           },                         
+                             
+                          child:  const Icon(Icons.download_sharp),
+                           
+                        ) ,
+
+
                                
                   ],
                 ),
@@ -277,7 +296,6 @@ class _RegistroScreen extends State<RegistroScreen>  {
                           trailing: IconButton(
                             onPressed: () async {
 
-
                                String? result = await showAlertConfirmar(context, 'Va a eliminar un registro, ¿está seguro?', 'Confirmación');
 
                                if (result == 'OK'){
@@ -307,6 +325,7 @@ class _RegistroScreen extends State<RegistroScreen>  {
                   ),
                  
             SizedBox(height: size.height * 0.02,),
+          
                  
             ],
           ),
@@ -315,6 +334,57 @@ class _RegistroScreen extends State<RegistroScreen>  {
       
     );
   }
+
+
+
+   void _showBottomSheet(BuildContext context) {
+     
+     showModalBottomSheet(
+      context: context,
+      backgroundColor: Colors.transparent,
+      builder: (BuildContext context) {
+             return Container(
+              decoration: const BoxDecoration(
+                    color: Colors.white, 
+                    borderRadius: BorderRadius.only(
+                                topLeft: Radius.circular(60),
+                                topRight: Radius.circular(60)), 
+                          ),
+              height: MediaQuery.of(context).size.height * 0.3, 
+              width: MediaQuery.of(context).size.height * 0.5 ,// Modal con altura de la mitad de la pantalla              
+              child:  Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                
+                   ListTile(
+                      leading: const Icon(Icons.download),
+                      title: const Text('Convertir a PDF'),
+                      onTap: () async {
+                        
+                        await createPDF(lstRegistros);
+                        Navigator.pop(context); 
+                      },
+                    ),
+
+                 
+                 ],
+              ),
+
+
+
+             
+             );
+
+      }
+
+
+     );
+
+
+
+
+
+   }
 }
 
 

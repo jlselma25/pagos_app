@@ -121,29 +121,10 @@ class _MenuScreenState extends State<MenuScreen> {
                 },
               ),
             ),
-            SizedBox(height: size.height * 0.03),
-
-
-            Container(
-               width: size.width * 0.74,
-              child: CustomButton(
-                color: Environment.color,
-                texto: '         GENERAR PDF ',
-                onTap: () async{
-                  
-                   setState(() {isLoading = true;});
-
-                   await createPDF();
-
-                
-                  setState(() {isLoading = false;});
-                },
-              ),
-            ),
+          
             SizedBox(height: size.height * 0.03),
            
-            SizedBox(height: size.height * 0.10,),   
-            
+            SizedBox(height: size.height * 0.10,),              
 
 
             if (isLoading) 
