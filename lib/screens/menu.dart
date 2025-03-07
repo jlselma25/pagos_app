@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 
 import 'package:pagos_app/global/environment.dart';
+import 'package:pagos_app/helpers/generar_pdf.dart';
 import 'package:pagos_app/helpers/show_alert.dart';
 import 'package:pagos_app/services/auth_service.dart';
 import 'package:pagos_app/widgets/custom_button.dart';
@@ -116,6 +117,25 @@ class _MenuScreenState extends State<MenuScreen> {
                     await showAlert2( context, 'Error token no válido ', Environment.proyecto);  
                     Navigator.pushReplacementNamed(context, 'login'); 
                   }
+                  setState(() {isLoading = false;});
+                },
+              ),
+            ),
+            SizedBox(height: size.height * 0.03),
+
+
+            Container(
+               width: size.width * 0.74,
+              child: CustomButton(
+                color: Environment.color,
+                texto: '         GENERAR PDF ',
+                onTap: () async{
+                  
+                   setState(() {isLoading = true;});
+
+                   await createPDF();
+
+                
                   setState(() {isLoading = false;});
                 },
               ),
