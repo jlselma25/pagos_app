@@ -32,12 +32,9 @@ class RegistroService  extends ChangeNotifier{
 
 
 
-Future obtenerSaldo () async{ 
-
-
-   final token = await getToken(); 
-   final id = await getId();
-    String saldo = '0.00';
+Future obtenerSaldo () async{
+  
+   final id = await getId();   
 
    final dio = Dio(BaseOptions(
                             baseUrl: Environment.apiUrl,
@@ -60,16 +57,10 @@ Future obtenerSaldo () async{
                colors = Colors.green;
            }  
         notifyListeners();
-      }
-
-
-       print(saldoActual);
+      }    
 
       
 }
-  
-
-
 
 
  Future<String> cargarRegistros (String dateFrom, String dateTo) async{ 

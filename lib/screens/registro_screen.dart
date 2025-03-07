@@ -187,8 +187,8 @@ class _RegistroScreen extends State<RegistroScreen>  {
                           
                           style: FilledButton.styleFrom(backgroundColor: Environment.color,),                          
                           onPressed: () async{     
+                            
                             _showBottomSheet(context);
-
                                            },                         
                              
                           child:  const Icon(Icons.download_sharp),
@@ -347,11 +347,11 @@ class _RegistroScreen extends State<RegistroScreen>  {
               decoration: const BoxDecoration(
                     color: Colors.white, 
                     borderRadius: BorderRadius.only(
-                                topLeft: Radius.circular(60),
-                                topRight: Radius.circular(60)), 
+                                topLeft: Radius.circular(15),
+                                topRight: Radius.circular(15)), 
                           ),
               height: MediaQuery.of(context).size.height * 0.3, 
-              width: MediaQuery.of(context).size.height * 0.5 ,// Modal con altura de la mitad de la pantalla              
+              width: MediaQuery.of(context).size.height * 0.5 ,   
               child:  Column(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
@@ -360,8 +360,15 @@ class _RegistroScreen extends State<RegistroScreen>  {
                       leading: const Icon(Icons.download),
                       title: const Text('Convertir a PDF'),
                       onTap: () async {
+
                         
-                        await createPDF(lstRegistros);
+                              if (lstRegistros.isEmpty){
+                               
+                                 await showAlert2( context, 'No se puede generar pdf por no exite ningun registro', Environment.proyecto);                                
+                                 return;
+                              }
+                        
+                        await createPDF(lstRegistros,fechaController.text,fechaControllerHasta.text);
                         Navigator.pop(context); 
                       },
                     ),
