@@ -1,7 +1,6 @@
 
 
-import 'dart:io';
-import 'package:flutter/foundation.dart' show kIsWeb;
+
 
 import 'package:flutter/material.dart';
 
@@ -28,7 +27,9 @@ class _HorarioScreenState extends State<HorarioScreen> {
   TextEditingController fechaController = TextEditingController();
   FocusNode focusNodeDate = FocusNode();
   Map<int, String> tiposMap = {};
+  Map<int, String> categorias = {};
   int? selectedValue;
+  int? selectedValueC;
   bool centro = false;
   bool tieneComida = false;
 
@@ -37,6 +38,7 @@ class _HorarioScreenState extends State<HorarioScreen> {
     super.initState();
     tarjetaController = TextEditingController();
     cargarTipos();
+    cargarCategorias();
    
   }
 
@@ -48,6 +50,12 @@ class _HorarioScreenState extends State<HorarioScreen> {
   void cargarTipos() async {
     final authService = Provider.of<AuthService>(context, listen: false);
     tiposMap = await authService.cargarTipos();
+    setState(() {});
+  }
+
+  void cargarCategorias() async {
+    final authService = Provider.of<AuthService>(context, listen: false);
+    categorias = await authService.cargarCategorias();
     setState(() {});
   }
 
@@ -146,18 +154,34 @@ class _HorarioScreenState extends State<HorarioScreen> {
 
               Row(
                 children: [
-                  SizedBox(  width: size.width * 0.20,),
+                  SizedBox(  width: size.width * 0.05,),
                   Container(
-                    padding: const EdgeInsets.symmetric(horizontal: 20),
+                    padding: const EdgeInsets.symmetric(horizontal: 10),
                     decoration: BoxDecoration(
                         color: Environment.color,
                         borderRadius: BorderRadius.circular(20),
                         border: Border.all(color: Colors.black, width: 1)),
                     height: size.height * 0.05,
-                    width: size.width * 0.60,
+                    width: size.width * 0.35,
                     child: Padding(
                       padding: const EdgeInsets.only(left: 10),
                       child: _dropBoxButton(),
+                    ),
+                  ),
+
+                  SizedBox(  width: size.width * 0.15,),
+
+                   Container(
+                    padding: const EdgeInsets.symmetric(horizontal: 10),
+                    decoration: BoxDecoration(
+                        color: Environment.color,
+                        borderRadius: BorderRadius.circular(20),
+                        border: Border.all(color: Colors.black, width: 1)),
+                    height: size.height * 0.05,
+                    width: size.width * 0.35,
+                    child: Padding(
+                      padding: const EdgeInsets.only(left: 10),
+                      child: _dropBoxTypeButton(),
                     ),
                   ),
                 ],
@@ -166,7 +190,7 @@ class _HorarioScreenState extends State<HorarioScreen> {
               SizedBox(
                 height: size.height * 0.10,
               ),
-              _ButtonSave(selectedValue: selectedValue, authService: authService, importe: importeController.text, concepto: conceptoController.text,),
+              _ButtonSave(selectedValue: selectedValue, authService: authService, importe: importeController.text, concepto: conceptoController.text,selectedValueC: selectedValueC,),
             ],
           ),
         ),
@@ -207,7 +231,37 @@ class _HorarioScreenState extends State<HorarioScreen> {
                          );
     }
 
+    DropdownButton<int> _dropBoxTypeButton() { 
+
+    return DropdownButton<int>(
+                          hint: const Text('Seleccione categoria',style: TextStyle(color: Colors.white),),   
+                          iconEnabledColor: Colors.white,   
+                          iconSize: 40,                 
+                          dropdownColor: Colors.grey.shade600,   
+                          underline: Container(),
+                          isExpanded: true,                
+                          items:   
+                           categorias.keys.map((int value) {                      
+                                   return DropdownMenuItem(
+                                        value: value,                                       
+                                        child: Text('${categorias[value]}',style: const TextStyle(color: Colors.white)));  
+                                      }).toList(),
+
+                          value: selectedValueC,
+                          onChanged: ( valueNew){                            
+                            setState(() {
+                              selectedValueC = valueNew;
+                                                          
+                             });
+                          },                                    
+                        
+                         );
+    }
+
+
   }
+
+  
 
 
 
@@ -258,12 +312,14 @@ class _ButtonSave extends StatelessWidget {
     required this.selectedValue,
     required this.authService,   
     required this.importe,
-    required this.concepto
+    required this.concepto,
+     required this.selectedValueC,
     
    
   });
 
   final int? selectedValue;
+   final int? selectedValueC;
   final AuthService authService;  
   final String importe;
   final String concepto;
@@ -309,7 +365,11 @@ class _ButtonSave extends StatelessWidget {
       //     }
         try{
 
-           final ok = await authService.saveRegister( selectedValue!,concepto, importe);                    
+          
+
+           
+
+           final ok = await authService.saveRegister( selectedValue!,selectedValueC ?? 0, concepto, importe);                    
     
            if (ok == '0') {
               // ignore: use_build_context_synchronously
@@ -368,7 +428,7 @@ class __FormState extends State<_Form> {
                     icon: const Icon(Icons.money_rounded,color:Color(0xff615AAB),)
                     ),
 
-           _ButtonSave(selectedValue: 1, authService: authService, importe: importeControler.text, concepto: conceptoController.text,),
+           _ButtonSave(selectedValue: 1, authService: authService, importe: importeControler.text, concepto: conceptoController.text,selectedValueC: 1,),
           ],
         ),
 

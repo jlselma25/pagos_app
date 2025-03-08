@@ -1,5 +1,7 @@
 import 'dart:convert';
 
+
+
 List<Tipos> tiposFromJson(String str) => List<Tipos>.from(json.decode(str).map((x) => Tipos.fromJson(x)));
 
 List<Tipos> tiposFromJsonList(List<dynamic> json) => List<Tipos>.from(json.map((x) => Tipos.fromJson(x)));

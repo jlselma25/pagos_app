@@ -121,6 +121,31 @@ class _MenuScreenState extends State<MenuScreen> {
                 },
               ),
             ),
+
+
+             SizedBox(height: size.height * 0.03),
+        
+            Container(
+               width: size.width * 0.74,
+              child: CustomButton(
+                color: Environment.color,
+                texto: '         ESTADISTICA ',
+                onTap: () async{
+                  
+                   setState(() {isLoading = true;});
+
+                   final ok = await authService.comprobarToken();
+
+                   if (ok) {
+                    Navigator.pushNamed(context, 'listado');   
+                   }else{
+                    await showAlert2( context, 'Error token no válido ', Environment.proyecto);  
+                    Navigator.pushReplacementNamed(context, 'login'); 
+                  }
+                  setState(() {isLoading = false;});
+                },
+              ),
+            ),
           
             SizedBox(height: size.height * 0.03),
            

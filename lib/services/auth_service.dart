@@ -6,6 +6,7 @@ import 'package:dio/dio.dart';
 import 'package:flutter/foundation.dart';
 
 import 'package:pagos_app/global/environment.dart';
+import 'package:pagos_app/models/categorias.dart';
 
 import 'package:pagos_app/models/resultado.dart';
 import 'package:pagos_app/models/tipos.dart';
@@ -87,6 +88,22 @@ class AuthService extends ChangeNotifier{
          return tipoMap;           
      }
      return tipoMap;     
+
+  }
+
+
+
+  Future <Map<int, String>> cargarCategorias() async { 
+      
+     final response = await dio.get('/CargarCategorias/' );      
+     List<Categorias> listaCaegorias = categoriasFromJsonList(response.data);
+     Map<int, String> tipoCate = {};    
+    
+     if (response.statusCode == 200){
+         tipoCate = {for (var categoria in listaCaegorias) categoria.numero: categoria.nombre };
+         return tipoCate;           
+     }
+     return tipoCate;     
 
   }
 
@@ -180,10 +197,12 @@ class AuthService extends ChangeNotifier{
   }
 
 
-  Future<String> saveRegister ( int tipo,  String concpeto, String importe )async{   
+  Future<String> saveRegister ( int tipo, int categoria,  String concpeto, String importe )async{   
 
         String token = await getToken();
         int id = await getId();
+
+      print(categoria);
 
        final dio2 = Dio(BaseOptions(
                             baseUrl: Environment.apiUrl,
@@ -199,7 +218,8 @@ class AuthService extends ChangeNotifier{
                                   'tipo':tipo,
                                   'importe':importe,
                                   'concepto': concpeto,   
-                                  'id': id   
+                                  'id': id ,
+                                  'categoria': categoria  
                                                                
 
                                 });
