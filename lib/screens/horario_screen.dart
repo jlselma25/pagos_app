@@ -207,7 +207,7 @@ class _HorarioScreenState extends State<HorarioScreen> {
   DropdownButton<int> _dropBoxButton() { 
 
     return DropdownButton<int>(
-                          hint: const Text('Seleccione tipo',style: TextStyle(color: Colors.white),),   
+                          hint: const Text('Tipo',style: TextStyle(color: Colors.white),),   
                           iconEnabledColor: Colors.white,   
                           iconSize: 40,                 
                           dropdownColor: Colors.grey.shade600,   
@@ -234,7 +234,7 @@ class _HorarioScreenState extends State<HorarioScreen> {
     DropdownButton<int> _dropBoxTypeButton() { 
 
     return DropdownButton<int>(
-                          hint: const Text('Seleccione categoria',style: TextStyle(color: Colors.white),),   
+                          hint: const Text('Categoria',style: TextStyle(color: Colors.white),),   
                           iconEnabledColor: Colors.white,   
                           iconSize: 40,                 
                           dropdownColor: Colors.grey.shade600,   
