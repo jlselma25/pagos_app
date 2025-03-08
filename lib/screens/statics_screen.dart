@@ -48,7 +48,7 @@ class _StaticsScreenState extends State<StaticsScreen> {
                 Padding(
                  padding:  const EdgeInsets.symmetric(horizontal: 20),
                  child: SizedBox(
-                  width: size.width * 0.10,
+                  width: size.width * 0.50,
                    child:    _TextUser(
                                 typeKey: TextInputType.none,
                                 readOnly: true,  
