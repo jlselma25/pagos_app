@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
+
 import 'package:pagos_app/global/environment.dart';
 import 'package:pagos_app/services/statics._service.dart';
-import 'package:pagos_app/widgets/logo.dart';
+
 import 'package:pie_chart/pie_chart.dart';
 import 'package:provider/provider.dart';
 
@@ -15,6 +15,13 @@ class StaticsScreen extends StatefulWidget {
 }
 
 class _StaticsScreenState extends State<StaticsScreen> {
+
+   TextEditingController fechaController = TextEditingController();
+   TextEditingController fechaHastaController = TextEditingController();
+  final FocusNode fechaFocusNode = FocusNode();
+  final FocusNode fechaHastaFocusNode = FocusNode();
+
+
   @override
   Widget build(BuildContext context) {
      final size = MediaQuery.of(context).size;  
@@ -35,7 +42,75 @@ class _StaticsScreenState extends State<StaticsScreen> {
       ),
       body: Column(
         children: [
-          Logo(),
+            Row(
+            mainAxisAlignment: MainAxisAlignment.center,
+             children: [
+                Padding(
+                 padding:  const EdgeInsets.symmetric(horizontal: 20),
+                 child: SizedBox(
+                  width: size.width * 0.10,
+                   child:    _TextUser(
+                                typeKey: TextInputType.none,
+                                readOnly: true,  
+                                textField: 'fecha',                             
+                                controller: fechaController,                              
+                                obscureText: false,                             
+                                texto: 'desde fecha',    
+                                onTap: () async {
+                                   final DateTime? picked = await showDatePicker(
+                                        context: context,
+                                        initialDate: DateTime.now(),  // Fecha inicial
+                                        firstDate: DateTime(2000),    // Fecha mínima
+                                        lastDate: DateTime(2101),     // Fecha máxima
+                                      );
+
+                                      if (picked != null) {
+                                        // Si el usuario selecciona una fecha, actualizamos el TextFormField
+                                        fechaController.text = "${picked.day.toString().padLeft(2,'0')}/${picked.month.toString().padLeft(2,'0')}/${picked.year}";
+                                        FocusScope.of(context).requestFocus(FocusNode());
+                                      }
+                                },                        
+                                icon: const Icon(Icons.date_range_sharp,color:Color(0xff615AAB),),
+                                focusNode: fechaFocusNode,                              
+                                    ),
+                              
+                            ),
+               ),
+
+                SizedBox(width: size.width * 0.20,),
+                Padding(
+                 padding:  const EdgeInsets.symmetric(horizontal: 20),
+                 child: SizedBox(
+                 width: size.width * 0.10,
+                   child:    _TextUser(
+                                typeKey: TextInputType.none,
+                                readOnly: true,  
+                                textField: 'fecha',                             
+                                controller: fechaHastaController,                              
+                                obscureText: false,                             
+                                texto: 'hasta fecha', 
+                                 onTap: () async {
+                                   final DateTime? picked = await showDatePicker(
+                                        context: context,
+                                        initialDate: DateTime.now(),  // Fecha inicial
+                                        firstDate: DateTime(2000),    // Fecha mínima
+                                        lastDate: DateTime(2101),     // Fecha máxima
+                                      );
+
+                                      if (picked != null) {
+                                        // Si el usuario selecciona una fecha, actualizamos el TextFormField
+                                        fechaHastaController.text = "${picked.day.toString().padLeft(2,'0')}/${picked.month.toString().padLeft(2,'0')}/${picked.year}";
+                                        FocusScope.of(context).requestFocus(FocusNode());
+                                      }
+                                },                                                   
+                                icon: const Icon(Icons.date_range_sharp,color:Color(0xff615AAB),) ,
+                                focusNode: fechaHastaFocusNode,                                                          
+                                    ),
+                              
+                            ),
+               ),
+             ],
+           ),
           SizedBox(height: size.height * 0.05,),
           Center(
             child: Column(
@@ -242,3 +317,65 @@ class _ContainerGrafic extends StatelessWidget {
     );
   }
 }
+
+
+class _TextUser extends StatelessWidget {
+  final String textField;  
+  final TextEditingController controller;
+  final bool obscureText;
+  final String texto ;
+  final Icon icon;
+  final bool readOnly;
+  final TextInputType typeKey;
+  final VoidCallback? onTap;
+   final FocusNode focusNode;
+
+  const _TextUser({
+    required this.textField, 
+    required this.controller, 
+    required this.obscureText,
+    required this.texto,
+    required this.icon,
+    required this.readOnly,
+    required this.typeKey, 
+    required this.focusNode,
+    this.onTap, 
+  
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    final border =  OutlineInputBorder(        
+      borderRadius: BorderRadius.circular(40)
+    );
+
+    final colors = Theme.of(context).colorScheme;
+
+
+    return TextFormField(
+        onTap: onTap,
+        focusNode: focusNode,
+        readOnly: readOnly,
+        keyboardType: typeKey,
+        obscureText: obscureText,
+        controller: controller,
+        decoration:  InputDecoration(   
+        
+          fillColor: Colors.white,     
+          filled: true,      
+          enabledBorder: border,
+          focusedErrorBorder: border.copyWith(borderSide: BorderSide(color: Colors.red.shade800)),          
+          errorBorder: border.copyWith(borderSide: BorderSide(color: Colors.red.shade800)),
+          isDense: true,
+          focusColor: colors.primary,          
+          focusedBorder: border.copyWith(borderSide: BorderSide(color: colors.primary)),
+          prefixIcon:  icon,
+          //prefixIcon:  textField == 'importe' ?  const Icon(Icons.money_outlined,color: Color(0xff615AAB),) :  const Icon(Icons.password,color:Color(0xff615AAB),),
+          label:     Text(texto)
+        ),
+      
+    );
+  }
+}
+
+
