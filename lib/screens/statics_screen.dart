@@ -45,44 +45,45 @@ class _StaticsScreenState extends State<StaticsScreen> {
             Row(
             mainAxisAlignment: MainAxisAlignment.start,
              children: [
-                Padding(
-                 padding:  const EdgeInsets.symmetric(horizontal: 20),
-                 child: SizedBox(
-                  width: size.width * 0.50,
-                   child:    _TextUser(
-                                typeKey: TextInputType.none,
-                                readOnly: true,  
-                                textField: 'fecha',                             
-                                controller: fechaController,                              
-                                obscureText: false,                             
-                                texto: 'desde fecha',    
-                                onTap: () async {
-                                   final DateTime? picked = await showDatePicker(
-                                        context: context,
-                                        initialDate: DateTime.now(),  // Fecha inicial
-                                        firstDate: DateTime(2000),    // Fecha mínima
-                                        lastDate: DateTime(2101),     // Fecha máxima
-                                      );
+                Column(
+                  children: [
+                    Padding(
+                     padding:  const EdgeInsets.symmetric(horizontal: 20),
+                     child: SizedBox(
+                      width: size.width * 0.30,
+                       child:    _TextUser(
+                                    typeKey: TextInputType.none,
+                                    readOnly: true,  
+                                    textField: 'fecha',                             
+                                    controller: fechaController,                              
+                                    obscureText: false,                             
+                                    texto: 'desde fecha',    
+                                    onTap: () async {
+                                       final DateTime? picked = await showDatePicker(
+                                            context: context,
+                                            initialDate: DateTime.now(),  // Fecha inicial
+                                            firstDate: DateTime(2000),    // Fecha mínima
+                                            lastDate: DateTime(2101),     // Fecha máxima
+                                          );
+                    
+                                          if (picked != null) {
+                                            // Si el usuario selecciona una fecha, actualizamos el TextFormField
+                                            fechaController.text = "${picked.day.toString().padLeft(2,'0')}/${picked.month.toString().padLeft(2,'0')}/${picked.year}";
+                                            FocusScope.of(context).requestFocus(FocusNode());
+                                          }
+                                    },                        
+                                    icon: const Icon(Icons.date_range_sharp,color:Color(0xff615AAB),),
+                                    focusNode: fechaFocusNode,                              
+                                        ),
+                                  
+                                ),
+                       ),
 
-                                      if (picked != null) {
-                                        // Si el usuario selecciona una fecha, actualizamos el TextFormField
-                                        fechaController.text = "${picked.day.toString().padLeft(2,'0')}/${picked.month.toString().padLeft(2,'0')}/${picked.year}";
-                                        FocusScope.of(context).requestFocus(FocusNode());
-                                      }
-                                },                        
-                                icon: const Icon(Icons.date_range_sharp,color:Color(0xff615AAB),),
-                                focusNode: fechaFocusNode,                              
-                                    ),
-                              
-                            ),
-               ),
-
-                SizedBox(width: size.width * 0.05,),
-                Padding(
-                 padding:  const EdgeInsets.symmetric(horizontal: 20),
-                 child: SizedBox(
-                 width: size.width * 0.10,
-                   child:    _TextUser(
+                          Padding(
+                            padding:  const EdgeInsets.fromLTRB(5, 10, 0, 0),
+                            child: SizedBox(
+                            width: size.width * 0.30,
+                              child:    _TextUser(
                                 typeKey: TextInputType.none,
                                 readOnly: true,  
                                 textField: 'fecha',                             
@@ -108,7 +109,24 @@ class _StaticsScreenState extends State<StaticsScreen> {
                                     ),
                               
                             ),
-               ),
+                         ),
+                       ],
+                      ),
+
+                      SizedBox(width: size.width * 0.05,),
+
+                     FilledButton(
+                          
+                          style: FilledButton.styleFrom(backgroundColor: Environment.color,),                          
+                          onPressed: () async{    
+                            
+                           
+                                           },                         
+                             
+                          child:  const Icon(Icons.refresh_rounded),
+                           
+                        ) ,
+             
              ],
            ),
           SizedBox(height: size.height * 0.05,),
