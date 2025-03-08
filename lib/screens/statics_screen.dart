@@ -56,7 +56,7 @@ class _StaticsScreenState extends State<StaticsScreen> {
                   ),           
                   
                   width: size.width * 0.90,
-                  height: size.height * 0.65,
+                  height: size.height * 0.70,
           
                   child:  Column(
                     
@@ -70,7 +70,7 @@ class _StaticsScreenState extends State<StaticsScreen> {
                             SizedBox(width: size.width * 0.04),
                             
                             Container(                          
-                              width: size.width * 0.50,
+                              width: size.width * 0.60,
                               height: size.height * 0.07,                         
                               decoration: BoxDecoration(
                                 color: Colors.white,
@@ -85,8 +85,8 @@ class _StaticsScreenState extends State<StaticsScreen> {
                               child: Row(
                                 children: [
                                   _ContainerGrafic(statticsService: statticsService),
-          
-                                 // _ContainerList(statticsService: statticsService),
+                                  SizedBox(height: size.height * 0.05,),
+                                  _ContainerList(statticsService: statticsService),
                                    
                                 ],
                               ),
@@ -174,8 +174,8 @@ class _ContainerList extends StatelessWidget {
            statticsService.changeColorContainer(false);
         },
         child: Container(                              
-          width: 100,
-          height: 50,
+          width:MediaQuery.of(context).size.width * 0.25 ,
+          height: MediaQuery.of(context).size.height * 0.05 ,
           decoration: BoxDecoration(
             color: statticsService.changeColor == true ? Environment.colorTextoMark : Environment.color,
             borderRadius: BorderRadius.circular(60)
