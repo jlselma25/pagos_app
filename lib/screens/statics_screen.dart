@@ -62,7 +62,7 @@ class _StaticsScreenState extends State<StaticsScreen> {
                     
                     children: [                 
                       Padding(
-                        padding:  const EdgeInsets.fromLTRB(15, 25, 0, 0),
+                        padding:  const EdgeInsets.fromLTRB(10, 25, 0, 0),
                         child: Row(
                           children: [
                             const Text('Estadistica',style: TextStyle(fontSize: 18,)),
@@ -85,7 +85,7 @@ class _StaticsScreenState extends State<StaticsScreen> {
                               child: Row(
                                 children: [
                                   _ContainerGrafic(statticsService: statticsService),
-                                  SizedBox(height: size.height * 0.05,),
+                                  SizedBox(height: size.height * 0.07,),
                                   _ContainerList(statticsService: statticsService),
                                    
                                 ],
@@ -141,7 +141,7 @@ class _StaticsScreenState extends State<StaticsScreen> {
 
       child: PieChart(
         dataMap: dataMap,
-        animationDuration: Duration(milliseconds: 800),
+        animationDuration: const Duration(milliseconds: 800),
         chartRadius: MediaQuery.of(context).size.width / 6.2,
         chartLegendSpacing: 80,
         chartType: ChartType.ring,
