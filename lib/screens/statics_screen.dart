@@ -142,13 +142,14 @@ class _StaticsScreenState extends State<StaticsScreen> {
       child: PieChart(
         dataMap: dataMap,
         animationDuration: const Duration(milliseconds: 800),
-        chartRadius: MediaQuery.of(context).size.width / 6.2,
+        chartRadius: MediaQuery.of(context).size.width / 1.2,
         chartLegendSpacing: 80,
         chartType: ChartType.ring,
         ringStrokeWidth: 32,
         legendOptions: const LegendOptions(
           legendPosition: LegendPosition.top,
           showLegendsInRow: true,
+          legendTextStyle: TextStyle( fontSize: 20)
         ),
         chartValuesOptions: const ChartValuesOptions(
         showChartValueBackground: false,
@@ -156,6 +157,7 @@ class _StaticsScreenState extends State<StaticsScreen> {
         showChartValuesInPercentage: true,
         showChartValuesOutside: false,
         decimalPlaces: 1,
+        chartValueStyle: TextStyle(fontSize: 20)
         
       ),
        
