@@ -65,9 +65,9 @@ class _StaticsScreenState extends State<StaticsScreen> {
                         padding:  const EdgeInsets.fromLTRB(25, 25, 0, 0),
                         child: Row(
                           children: [
-                            const Text('Estadistica',style: TextStyle(fontSize: 24,)),
+                            const Text('Estadistica',style: TextStyle(fontSize: 18,)),
                            
-                            SizedBox(width: size.width * 0.45),
+                            SizedBox(width: size.width * 0.15),
                             
                             Container(                          
                               width: 300,
