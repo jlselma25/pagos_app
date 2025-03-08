@@ -1,6 +1,8 @@
 
 
-import 'dart:ui';
+
+
+import 'package:flutter/material.dart';
 
 class Environment { 
  
@@ -11,5 +13,7 @@ class Environment {
   static  Color color = const Color(0xFF1F4079);
   static String proyecto = 'Pagos app';
   static String version = 'v.3.5';
+  static Color colorTextoMark =  Colors.white;
+  static Color colorText =  Colors.black;
 
 }

@@ -130,19 +130,10 @@ class _MenuScreenState extends State<MenuScreen> {
               child: CustomButton(
                 color: Environment.color,
                 texto: '         ESTADISTICA ',
-                onTap: () async{
-                  
-                   setState(() {isLoading = true;});
-
-                   final ok = await authService.comprobarToken();
-
-                   if (ok) {
-                    Navigator.pushNamed(context, 'listado');   
-                   }else{
-                    await showAlert2( context, 'Error token no válido ', Environment.proyecto);  
-                    Navigator.pushReplacementNamed(context, 'login'); 
-                  }
-                  setState(() {isLoading = false;});
+                onTap: () async{         
+                          
+                  Navigator.pushReplacementNamed(context, 'statics');                
+                 
                 },
               ),
             ),

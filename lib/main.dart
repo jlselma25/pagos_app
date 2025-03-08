@@ -4,6 +4,7 @@ import 'package:pagos_app/routers/routes.dart';
 import 'package:pagos_app/services/auth_service.dart';
 import 'package:pagos_app/services/local_storage.dart';
 import 'package:pagos_app/services/registro_service.dart';
+import 'package:pagos_app/services/statics._service.dart';
 import 'package:provider/provider.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 
@@ -22,7 +23,8 @@ class MainApp extends StatelessWidget {
 
        providers: [
         ChangeNotifierProvider(create: (_) => AuthService() ),
-       ChangeNotifierProvider(create: (_) => RegistroService())
+        ChangeNotifierProvider(create: (_) => RegistroService()),
+        ChangeNotifierProvider(create: (_) => StaticsService())
         
       ],
       child: MaterialApp(
