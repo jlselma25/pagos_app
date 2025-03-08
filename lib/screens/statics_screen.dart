@@ -71,10 +71,10 @@ class _StaticsScreenState extends State<StaticsScreen> {
                             
                             Container(                          
                               width: size.width * 0.50,
-                              height: size.height * 0.10,                         
+                              height: size.height * 0.07,                         
                               decoration: BoxDecoration(
                                 color: Colors.white,
-                                borderRadius: BorderRadius.circular(60),
+                                borderRadius: BorderRadius.circular(100),
                                 border: Border.all(
                                   color: Colors.black,
                                   width: 1.0
@@ -214,7 +214,7 @@ class _ContainerGrafic extends StatelessWidget {
           statticsService.changeColorContainer(true);
         },
         child: Container(                              
-          width:MediaQuery.of(context).size.width * 0.15 ,
+          width:MediaQuery.of(context).size.width * 0.25 ,
           height: MediaQuery.of(context).size.height * 0.05 ,
           decoration: BoxDecoration(
             color:   statticsService.changeColor == true ?  Environment.color : Colors.white,
