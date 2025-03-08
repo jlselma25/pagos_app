@@ -56,7 +56,7 @@ class _StaticsScreenState extends State<StaticsScreen> {
                   ),           
                   
                   width: size.width * 0.90,
-                  height: size.height * 0.30,
+                  height: size.height * 0.80,
           
                   child:  Column(
                     
@@ -70,8 +70,8 @@ class _StaticsScreenState extends State<StaticsScreen> {
                             SizedBox(width: size.width * 0.15),
                             
                             Container(                          
-                              width: 300,
-                              height: size.height * 0.80,                         
+                              width: size.width * 0.20,
+                              height: size.height * 0.10,                         
                               decoration: BoxDecoration(
                                 color: Colors.white,
                                 borderRadius: BorderRadius.circular(60),
@@ -213,8 +213,8 @@ class _ContainerGrafic extends StatelessWidget {
           statticsService.changeColorContainer(true);
         },
         child: Container(                              
-          width:MediaQuery.of(context).size.width * 0.20 ,
-          height: MediaQuery.of(context).size.height * 0.15 ,
+          width:MediaQuery.of(context).size.width * 0.06 ,
+          height: MediaQuery.of(context).size.height * 0.05 ,
           decoration: BoxDecoration(
             color:   statticsService.changeColor == true ?  Environment.color : Colors.white,
             borderRadius: BorderRadius.circular(60)
