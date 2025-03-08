@@ -55,7 +55,7 @@ class _StaticsScreenState extends State<StaticsScreen> {
                     ]
                   ),           
                   
-                  width: size.width * 0.60,
+                  width: size.width * 0.90,
                   height: size.height * 0.30,
           
                   child:  Column(
@@ -86,7 +86,7 @@ class _StaticsScreenState extends State<StaticsScreen> {
                                 children: [
                                   _ContainerGrafic(statticsService: statticsService),
           
-                                  _ContainerList(statticsService: statticsService),
+                                 // _ContainerList(statticsService: statticsService),
                                    
                                 ],
                               ),
@@ -213,8 +213,8 @@ class _ContainerGrafic extends StatelessWidget {
           statticsService.changeColorContainer(true);
         },
         child: Container(                              
-          width:MediaQuery.of(context).size.width * 0.50 ,
-          height: MediaQuery.of(context).size.height * 0.25 ,
+          width:MediaQuery.of(context).size.width * 0.20 ,
+          height: MediaQuery.of(context).size.height * 0.15 ,
           decoration: BoxDecoration(
             color:   statticsService.changeColor == true ?  Environment.color : Colors.white,
             borderRadius: BorderRadius.circular(60)
@@ -222,7 +222,7 @@ class _ContainerGrafic extends StatelessWidget {
           child:  Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-               Text('Grafico',style: TextStyle(color: statticsService.changeColor == true ? Environment.colorTextoMark : Environment.colorText,fontSize: 12),)
+               Text('Grafico',style: TextStyle(color: statticsService.changeColor == true ? Environment.colorTextoMark : Environment.colorText,fontSize: 10),)
             ],
           )
           
