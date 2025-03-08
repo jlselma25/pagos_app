@@ -136,12 +136,12 @@ class _StaticsScreenState extends State<StaticsScreen> {
   
     return Container(
       width: size.width * 0.80,
-      height: size.height * 0.50,
+      height: size.height * 0.20,
       color: Colors.red,
       child: PieChart(
         dataMap: dataMap,
         animationDuration: Duration(milliseconds: 800),
-        chartRadius: MediaQuery.of(context).size.width / 5.2,
+        chartRadius: MediaQuery.of(context).size.width / 2.2,
         chartLegendSpacing: 80,
         chartType: ChartType.ring,
         ringStrokeWidth: 32,
