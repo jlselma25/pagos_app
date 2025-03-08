@@ -70,7 +70,7 @@ class _StaticsScreenState extends State<StaticsScreen> {
                             SizedBox(width: size.width * 0.15),
                             
                             Container(                          
-                              width: size.width * 0.20,
+                              width: size.width * 0.50,
                               height: size.height * 0.10,                         
                               decoration: BoxDecoration(
                                 color: Colors.white,
