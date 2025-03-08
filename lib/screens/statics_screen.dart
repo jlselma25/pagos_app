@@ -62,12 +62,12 @@ class _StaticsScreenState extends State<StaticsScreen> {
                     
                     children: [                 
                       Padding(
-                        padding:  const EdgeInsets.fromLTRB(25, 25, 0, 0),
+                        padding:  const EdgeInsets.fromLTRB(15, 25, 0, 0),
                         child: Row(
                           children: [
                             const Text('Estadistica',style: TextStyle(fontSize: 18,)),
                            
-                            SizedBox(width: size.width * 0.04),
+                            SizedBox(width: size.width * 0.02),
                             
                             Container(                          
                               width: size.width * 0.60,
@@ -138,6 +138,7 @@ class _StaticsScreenState extends State<StaticsScreen> {
       width: size.width * 0.80,
       height: size.height * 0.20,
       color: Colors.red,
+
       child: PieChart(
         dataMap: dataMap,
         animationDuration: Duration(milliseconds: 800),
@@ -145,12 +146,17 @@ class _StaticsScreenState extends State<StaticsScreen> {
         chartLegendSpacing: 80,
         chartType: ChartType.ring,
         ringStrokeWidth: 32,
+        legendOptions: LegendOptions(
+          legendPosition: LegendPosition.top,
+          showLegendsInRow: true,
+        ),
         chartValuesOptions: const ChartValuesOptions(
         showChartValueBackground: false,
         showChartValues: true,
         showChartValuesInPercentage: true,
         showChartValuesOutside: false,
         decimalPlaces: 1,
+        
       ),
        
         ));
