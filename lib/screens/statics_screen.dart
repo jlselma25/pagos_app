@@ -35,7 +35,7 @@ class _StaticsScreenState extends State<StaticsScreen> {
       body: Column(
         children: [
           Logo(),
-          SizedBox(height: size.height * 0.10,),
+          SizedBox(height: size.height * 0.05,),
           Center(
             child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
@@ -56,7 +56,7 @@ class _StaticsScreenState extends State<StaticsScreen> {
                   ),           
                   
                   width: size.width * 0.90,
-                  height: size.height * 0.80,
+                  height: size.height * 0.75,
           
                   child:  Column(
                     
@@ -67,7 +67,7 @@ class _StaticsScreenState extends State<StaticsScreen> {
                           children: [
                             const Text('Estadistica',style: TextStyle(fontSize: 18,)),
                            
-                            SizedBox(width: size.width * 0.15),
+                            SizedBox(width: size.width * 0.08),
                             
                             Container(                          
                               width: size.width * 0.50,
@@ -213,7 +213,7 @@ class _ContainerGrafic extends StatelessWidget {
           statticsService.changeColorContainer(true);
         },
         child: Container(                              
-          width:MediaQuery.of(context).size.width * 0.06 ,
+          width:MediaQuery.of(context).size.width * 0.15 ,
           height: MediaQuery.of(context).size.height * 0.05 ,
           decoration: BoxDecoration(
             color:   statticsService.changeColor == true ?  Environment.color : Colors.white,
@@ -222,7 +222,7 @@ class _ContainerGrafic extends StatelessWidget {
           child:  Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-               Text('Grafico',style: TextStyle(color: statticsService.changeColor == true ? Environment.colorTextoMark : Environment.colorText,fontSize: 10),)
+               Text('Grafico',style: TextStyle(color: statticsService.changeColor == true ? Environment.colorTextoMark : Environment.colorText,fontSize: 12),)
             ],
           )
           
