@@ -22,6 +22,7 @@ class _StaticsScreenState extends State<StaticsScreen> {
   
 
     return Scaffold(
+      backgroundColor: Colors.white,
       appBar: AppBar(
          backgroundColor: Colors.white,
         centerTitle: true,
@@ -96,7 +97,7 @@ class _StaticsScreenState extends State<StaticsScreen> {
                           ],
                         ),
                       ),
-                    SizedBox(height: size.height * 0.05,),
+                  
 
                      Row(
                       mainAxisAlignment: MainAxisAlignment.center,
