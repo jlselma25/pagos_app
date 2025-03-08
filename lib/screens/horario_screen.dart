@@ -169,7 +169,7 @@ class _HorarioScreenState extends State<HorarioScreen> {
                     ),
                   ),
 
-                  SizedBox(  width: size.width * 0.15,),
+                  SizedBox(  width: size.width * 0.05,),
 
                    Container(
                     padding: const EdgeInsets.symmetric(horizontal: 10),
@@ -178,7 +178,7 @@ class _HorarioScreenState extends State<HorarioScreen> {
                         borderRadius: BorderRadius.circular(20),
                         border: Border.all(color: Colors.black, width: 1)),
                     height: size.height * 0.05,
-                    width: size.width * 0.35,
+                    width: size.width * 0.45,
                     child: Padding(
                       padding: const EdgeInsets.only(left: 10),
                       child: _dropBoxTypeButton(),
