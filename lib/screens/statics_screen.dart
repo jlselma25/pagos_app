@@ -43,7 +43,7 @@ class _StaticsScreenState extends State<StaticsScreen> {
       body: Column(
         children: [
             Row(
-            mainAxisAlignment: MainAxisAlignment.center,
+            mainAxisAlignment: MainAxisAlignment.start,
              children: [
                 Padding(
                  padding:  const EdgeInsets.symmetric(horizontal: 20),
@@ -77,7 +77,7 @@ class _StaticsScreenState extends State<StaticsScreen> {
                             ),
                ),
 
-                SizedBox(width: size.width * 0.20,),
+                SizedBox(width: size.width * 0.05,),
                 Padding(
                  padding:  const EdgeInsets.symmetric(horizontal: 20),
                  child: SizedBox(
