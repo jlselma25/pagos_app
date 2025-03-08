@@ -150,7 +150,7 @@ class _StaticsScreenState extends State<StaticsScreen> {
         legendOptions: const LegendOptions(
           legendPosition: LegendPosition.top,
           showLegendsInRow: true,
-          legendTextStyle: TextStyle( fontSize: 20)
+          legendTextStyle: TextStyle( fontSize: 16)
         ),
         chartValuesOptions: const ChartValuesOptions(
         showChartValueBackground: false,
