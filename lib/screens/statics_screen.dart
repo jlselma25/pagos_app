@@ -85,7 +85,7 @@ class _StaticsScreenState extends State<StaticsScreen> {
                               child: Row(
                                 children: [
                                   _ContainerGrafic(statticsService: statticsService),
-                                  SizedBox(height: size.height * 0.07,),
+                                  SizedBox(height: size.height * 0.08,),
                                   _ContainerList(statticsService: statticsService),
                                    
                                 ],
@@ -135,9 +135,9 @@ class _StaticsScreenState extends State<StaticsScreen> {
   };
   
     return Container(
-      width: size.width * 0.80,
-      height: size.height * 0.50,
-      color: Colors.red,
+      width: size.width * 0.85,
+      height: size.height * 0.55,
+      color: Colors.white,
 
       child: PieChart(
         dataMap: dataMap,
