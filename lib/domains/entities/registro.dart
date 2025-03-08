@@ -16,6 +16,7 @@ class Registro {
   final int id;
 
 
+
   Registro({
     required this.importe, 
     required this.fecha, 
@@ -23,6 +24,7 @@ class Registro {
     required this.token,
     required this.nombre,
     required this.id,
+  
     
     
     });
@@ -35,7 +37,8 @@ class Registro {
         tipo: json["tipo"] ?? '',
         token: json["token"],
         nombre: json["nombre"],
-        id: json["id"]
+        id: json["id"],
+       
         
     );
 
@@ -47,7 +50,8 @@ class Registro {
         "tipo": tipo,
         "token": token,
         "nombre": nombre,
-    };
+        
+            };
 
 
 }

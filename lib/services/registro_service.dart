@@ -1,6 +1,7 @@
 import 'package:dio/dio.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
+import 'package:pagos_app/domains/entities/estadistica.dart';
 import 'package:pagos_app/domains/entities/registro.dart';
 import 'package:pagos_app/global/environment.dart';
 import 'package:pagos_app/models/resultado.dart';
@@ -12,15 +13,15 @@ import 'package:shared_preferences/shared_preferences.dart';
 
 class RegistroService  extends ChangeNotifier{
 
-
-
-
  
    List<Registro> lstRegistros = [];
+   List<Estadistica> lstEstadistica = [];
+   Map<String, double> estadisticasMap  = {};
    bool verLabel = false;
    double totalSalidas = 0;
    double totalEntradas = 0;
    double saldoActual = 0;
+   bool filtar = false;
    Color colors = Colors.black;
 
     void deleteLista()
@@ -125,6 +126,57 @@ Future obtenerSaldo () async{
      return '0';
 
   }
+
+
+
+
+  Future<String> obtenerEstadisticas (String dateFrom, String dateTo) async{ 
+
+     
+      lstRegistros.clear();  
+      final id = await getId();
+      final token = await getToken();
+     
+
+
+       final dio = Dio(BaseOptions(
+                            baseUrl: Environment.apiUrl,
+                            headers: {
+                                        'Content-Type': 'application/json',
+                                        'x-token': token
+                                     }
+                            )
+                       );     
+
+
+      final response = await dio.get('/ObtenerEstadisticas/',
+              queryParameters: {
+                                  'usuario':id,                                   
+                                  'fechaDesde':dateFrom.toString(),
+                                  'fechaFin':dateTo.toString(),
+                                      
+                                });
+
+      if (response.statusCode == 200){
+
+        lstEstadistica =  estadisticaFromJsonList(response.data);          
+
+        if (lstEstadistica.isEmpty) 
+        {
+             return '2';
+        }       
+
+        estadisticasMap = {  for (var estadistica in lstEstadistica) estadistica.leyenda: estadistica.importe   };
+
+        filtar = true;
+        notifyListeners();     
+        return '1';       
+     }  
+
+     return '0';
+
+  }
+
 
 
   Future<int> getId() async {

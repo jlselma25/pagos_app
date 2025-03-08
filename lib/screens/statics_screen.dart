@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 
 import 'package:pagos_app/global/environment.dart';
+import 'package:pagos_app/helpers/show_alert.dart';
+import 'package:pagos_app/services/registro_service.dart';
 import 'package:pagos_app/services/statics._service.dart';
 
 import 'package:pie_chart/pie_chart.dart';
@@ -26,6 +28,7 @@ class _StaticsScreenState extends State<StaticsScreen> {
   Widget build(BuildContext context) {
      final size = MediaQuery.of(context).size;  
      final statticsService = Provider.of<StaticsService>(context, listen: true);
+     final registrosService = Provider.of<RegistroService>(context, listen: true);
   
 
     return Scaffold(
@@ -119,10 +122,18 @@ class _StaticsScreenState extends State<StaticsScreen> {
                           
                           style: FilledButton.styleFrom(backgroundColor: Environment.color,),                          
                           onPressed: () async{    
-                            
-                           
-                                           },                         
-                             
+
+                                   final ok = await registrosService.obtenerEstadisticas(fechaController.text, fechaHastaController.text);
+                                  
+                                   if (ok == '2')
+                                   {
+                                 // ignore: use_build_context_synchronously
+                                    await showAlert2( context, 'No existe ningun registro en ese periódo', Environment.proyecto);                                
+                                    return;
+                                 }                      
+                                  
+                               },                         
+                        
                           child:  const Icon(Icons.refresh_rounded),
                            
                         ) ,
@@ -197,7 +208,7 @@ class _StaticsScreenState extends State<StaticsScreen> {
                       children: [
                         Padding(
                           padding:  const EdgeInsets.symmetric(horizontal: 10),
-                          child: _showGrafic()
+                          child: registrosService.filtar == true ? _showGrafic(registrosService.estadisticasMap) : const ContainerEmpty()
                         ) 
                       ],
                     )
@@ -214,19 +225,15 @@ class _StaticsScreenState extends State<StaticsScreen> {
     );
   }
 
-   Widget _showGrafic(){
-    final size = MediaQuery.of(context).size;  
+   Widget _showGrafic(  Map<String, double> dataMap){
+    final size = MediaQuery.of(context).size;    
 
-
-    print(size.width);
-    print(size.height);
-
-    Map<String, double> dataMap = {
-    "Flutter": 5,
-    "React": 3,
-    "Xamarin": 2,
-    "Ionic": 2,
-  };
+  //   Map<String, double> dataMap = {
+  //   "Flutter": 5,
+  //   "React": 3,
+  //   "Xamarin": 2,
+  //   "Ionic": 2,
+  // };
   
     return Container(
       width: size.width * 0.85,
@@ -256,6 +263,21 @@ class _StaticsScreenState extends State<StaticsScreen> {
       ),
        
         ));
+  }
+}
+
+
+
+class ContainerEmpty extends StatelessWidget {
+  const ContainerEmpty({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+       width:  MediaQuery.of(context).size.width * 0.85,
+      height:  MediaQuery.of(context).size.height * 0.55,
+      color: Colors.white,
+    );
   }
 }
 
