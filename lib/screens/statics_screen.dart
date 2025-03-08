@@ -123,6 +123,10 @@ class _StaticsScreenState extends State<StaticsScreen> {
    Widget _showGrafic(){
     final size = MediaQuery.of(context).size;  
 
+
+    print(size.width);
+    print(size.height);
+
     Map<String, double> dataMap = {
     "Flutter": 5,
     "React": 3,
@@ -131,8 +135,8 @@ class _StaticsScreenState extends State<StaticsScreen> {
   };
   
     return Container(
-      width: size.width * 0.50,
-      height: size.height * 0.30,
+      width: size.width * 0.80,
+      height: size.height * 0.60,
       child: PieChart(
         dataMap: dataMap,
         animationDuration: Duration(milliseconds: 800),
@@ -141,7 +145,7 @@ class _StaticsScreenState extends State<StaticsScreen> {
         chartType: ChartType.ring,
         ringStrokeWidth: 32,
         chartValuesOptions: const ChartValuesOptions(
-        showChartValueBackground: true,
+        showChartValueBackground: false,
         showChartValues: true,
         showChartValuesInPercentage: true,
         showChartValuesOutside: false,
