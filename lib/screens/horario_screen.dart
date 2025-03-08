@@ -178,7 +178,7 @@ class _HorarioScreenState extends State<HorarioScreen> {
                         borderRadius: BorderRadius.circular(20),
                         border: Border.all(color: Colors.black, width: 1)),
                     height: size.height * 0.05,
-                    width: size.width * 0.45,
+                    width: size.width * 0.50,
                     child: Padding(
                       padding: const EdgeInsets.only(left: 10),
                       child: _dropBoxTypeButton(),
