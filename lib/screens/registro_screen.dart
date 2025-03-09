@@ -68,7 +68,8 @@ class _RegistroScreen extends State<RegistroScreen>  {
           icon: const Icon(Icons.arrow_back_ios_new_outlined),
           onPressed: () {       
          
-            Navigator.pop(context);
+            //Navigator.pop(context);
+            Navigator.pushReplacementNamed(context, 'menu'); 
           },
         ),
         actions:  [
@@ -292,7 +293,7 @@ class _RegistroScreen extends State<RegistroScreen>  {
                         color: registroService.lstRegistros[index].tipo == 'I' ?  Colors.green.withOpacity(0.6) : Colors.red.withOpacity(0.5),
                         child:  ListTile(                          
                           title:  Text('${registroService.lstRegistros[index].fecha.toString().padRight(12,' ')}    ${registroService.lstRegistros[index].nombre.toString().padRight(14,' ')}' ,style: const TextStyle(color: Colors.black),),   
-                          subtitle: Text('Importe:  ${registroService.lstRegistros[index].importe} € ' ,style: const TextStyle(color: Colors.black),),   
+                          subtitle: Text('Importe:  ${registroService.lstRegistros[index].importe} €           ${registroService.lstRegistros[index].leyenda}' ,style: const TextStyle(color: Colors.black),),   
                           trailing: IconButton(
                             onPressed: () async {
 

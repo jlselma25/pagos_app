@@ -12,7 +12,7 @@ class Environment {
   static String codigoRegistro = '220212';
   static  Color color = const Color(0xFF1F4079);
   static String proyecto = 'Pagos app';
-  static String version = 'v.4.0';
+  static String version = 'v.4.1';
   static Color colorTextoMark =  Colors.white;
   static Color colorText =  Colors.black;
 

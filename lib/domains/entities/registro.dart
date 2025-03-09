@@ -14,6 +14,7 @@ class Registro {
   final String token;
   final String nombre;
   final int id;
+  final String leyenda;
 
 
 
@@ -24,6 +25,7 @@ class Registro {
     required this.token,
     required this.nombre,
     required this.id,
+    required this.leyenda
   
     
     
@@ -38,6 +40,7 @@ class Registro {
         token: json["token"],
         nombre: json["nombre"],
         id: json["id"],
+        leyenda: json["leyenda"],
        
         
     );
@@ -50,6 +53,7 @@ class Registro {
         "tipo": tipo,
         "token": token,
         "nombre": nombre,
+        "leyenda": leyenda
         
             };
 
