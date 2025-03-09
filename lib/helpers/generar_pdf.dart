@@ -91,6 +91,9 @@ import 'mobile.dart' if(dart.library.html) 'web.dart';
     row.cells[2].style.borders.bottom = PdfPens.blue;
     row.cells[2].style.borders.left = PdfPens.transparent;  
     row.cells[2].style.borders.right = PdfPens.blue;
+
+
+    print ('i: ' + i.toString() + '    ' +       lstRegistros[i].id.toString());
   }
 
     grid.draw(page: page, bounds: Rect.fromLTWH(0, yPosition + 10, 0, 0));
