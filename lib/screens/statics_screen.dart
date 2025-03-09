@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:pagos_app/domains/entities/estadistica.dart';
+
 
 import 'package:pagos_app/global/environment.dart';
+import 'package:pagos_app/helpers/colors_listtittle.dart';
 import 'package:pagos_app/helpers/show_alert.dart';
 import 'package:pagos_app/services/registro_service.dart';
 import 'package:pagos_app/services/statics._service.dart';
@@ -206,10 +209,22 @@ class _StaticsScreenState extends State<StaticsScreen> {
                      Row(
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
-                        Padding(
-                          padding:  const EdgeInsets.symmetric(horizontal: 10),
-                          child: registrosService.filtar == true ? _showGrafic(registrosService.estadisticasMap) : const ContainerEmpty()
-                        ) 
+
+                        if(statticsService.staticTyep == true)
+                            Padding(
+                              padding:  const EdgeInsets.symmetric(horizontal: 10),
+                              child: registrosService.filtar == true ? _showGrafic(registrosService.estadisticasMap) : const ContainerEmpty()
+                            ),
+
+                          if(statticsService.staticTyep == false)
+                        
+                            Padding(
+                              padding:  const EdgeInsets.symmetric(horizontal: 10),
+                              child: registrosService.filtar == true ? _ListBuilder(lstRegistros: registrosService.lstEstadistica) : const ContainerEmpty()
+                            ) 
+ 
+
+                        
                       ],
                     )
                     ],
@@ -263,6 +278,86 @@ class _StaticsScreenState extends State<StaticsScreen> {
       ),
        
         ));
+  }
+}
+
+
+
+class _ListBuilder extends StatelessWidget {
+
+  final List<Estadistica> lstRegistros;
+  const _ListBuilder(
+    {
+      super.key, 
+      required this.lstRegistros
+      
+    });
+
+  @override
+  Widget build(BuildContext context) {
+     final size = MediaQuery.of(context).size;    
+
+    return Container(
+      margin:const EdgeInsetsDirectional.fromSTEB(0, 20, 0, 0),
+      width: size.width * 0.65,
+      height: size.height * 0.55,     
+     
+      child: ListView.builder(
+        itemCount: lstRegistros.length,
+         itemBuilder: (context,index){
+          
+            final item = lstRegistros[index];
+            Color? color  ;
+            switch(item.leyenda){
+              case 'ALI':
+                color = colores[0];
+                break;  
+               
+               case 'VIA':
+                color = colores[1];
+                break;
+             
+               default:
+               color = Colors.black12;
+                  
+
+            }
+        
+          return  _CustomListTitle(item: item,color: color,);
+        } ,     
+        
+      ),
+    );
+  }
+}
+
+
+class _CustomListTitle extends StatelessWidget {
+
+  final Estadistica item;
+  final Color color;
+  const _CustomListTitle(
+    {
+    super.key, 
+    required this.item, 
+    required this.color 
+    });
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      margin: const EdgeInsets.all(6),
+     
+      decoration: BoxDecoration(
+         color: color,
+        borderRadius: BorderRadius.circular(20)
+      ),
+      child: ListTile(       
+            title: Text(item.leyenda),         
+            trailing:  const Icon(Icons.arrow_forward_ios_rounded,color: Colors.black,),
+           
+      ),
+    );
   }
 }
 
