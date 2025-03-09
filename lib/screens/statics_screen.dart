@@ -299,29 +299,17 @@ class _ListBuilder extends StatelessWidget {
 
     return Container(
       margin:const EdgeInsetsDirectional.fromSTEB(0, 20, 0, 0),
-      width: size.width * 0.65,
+      width: size.width * 0.75,
       height: size.height * 0.55,     
+    
      
       child: ListView.builder(
         itemCount: lstRegistros.length,
          itemBuilder: (context,index){
           
             final item = lstRegistros[index];
-            Color? color  ;
-            switch(item.leyenda){
-              case 'ALI':
-                color = colores[0];
-                break;  
-               
-               case 'VIA':
-                color = colores[1];
-                break;
-             
-               default:
-               color = Colors.black12;
-                  
-
-            }
+            Color color =  colorListTittle(item.leyenda);
+          
         
           return  _CustomListTitle(item: item,color: color,);
         } ,     
@@ -331,6 +319,8 @@ class _ListBuilder extends StatelessWidget {
   }
 }
 
+
+ 
 
 class _CustomListTitle extends StatelessWidget {
 
@@ -350,7 +340,7 @@ class _CustomListTitle extends StatelessWidget {
      
       decoration: BoxDecoration(
          color: color,
-        borderRadius: BorderRadius.circular(20)
+        borderRadius: BorderRadius.circular(10)
       ),
       child: ListTile(       
             title: Text(item.leyenda),         
