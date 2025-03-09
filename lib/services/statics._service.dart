@@ -1,6 +1,6 @@
 
 
-import 'dart:io';
+
 
 import 'package:flutter/material.dart';
 
@@ -12,10 +12,7 @@ class StaticsService extends ChangeNotifier{
 
   changeColorContainer(bool valor){
     changeColor = valor;
-    staticTyep = valor;
-
-
-    print(staticTyep);
+    staticTyep = valor;   
     notifyListeners();
 
   }

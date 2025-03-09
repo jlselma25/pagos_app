@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:pagos_app/domains/entities/estadistica.dart';
 
 
@@ -307,7 +308,7 @@ class _ListBuilder extends StatelessWidget {
         itemCount: lstRegistros.length,
          itemBuilder: (context,index){
           
-            final item = lstRegistros[index];
+            final item = lstRegistros[index];            
             Color color =  colorListTittle(item.leyenda);
           
         
@@ -343,7 +344,8 @@ class _CustomListTitle extends StatelessWidget {
         borderRadius: BorderRadius.circular(10)
       ),
       child: ListTile(       
-            title: Text(item.leyenda),         
+            leading: const FaIcon(FontAwesomeIcons.pizzaSlice,size:25, color: Colors.black,),
+            title: Text(item.nombre),         
             trailing:  const Icon(Icons.arrow_forward_ios_rounded,color: Colors.black,),
            
       ),

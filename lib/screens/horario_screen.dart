@@ -241,10 +241,13 @@ class _HorarioScreenState extends State<HorarioScreen> {
                           underline: Container(),
                           isExpanded: true,                
                           items:   
-                           categorias.keys.map((int value) {                      
+                           categorias.entries.map((entry) {      
+                                 int key = entry.key;
+                                 String nombre = entry.value;           
                                    return DropdownMenuItem(
-                                        value: value,                                       
-                                        child: Text('${categorias[value]}',style: const TextStyle(color: Colors.white)));  
+                                        value: key,                                       
+                                        //child: Text('${categorias[value]}',style: const TextStyle(color: Colors.white))); 
+                                        child: Text(nombre,style: const TextStyle(color: Colors.white)));  
                                       }).toList(),
 
                           value: selectedValueC,
