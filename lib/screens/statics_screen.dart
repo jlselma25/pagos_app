@@ -344,7 +344,7 @@ class _CustomListTitle extends StatelessWidget {
         borderRadius: BorderRadius.circular(10)
       ),
       child: ListTile(       
-            leading: const FaIcon(FontAwesomeIcons.pizzaSlice,size:25, color: Colors.black,),
+            leading: const FaIcon(FontAwesomeIcons.pizzaSlice,size:25, color: Colors.white,),
             title: Text(item.nombre,style: const TextStyle(color:Colors.white, fontWeight: FontWeight.w600),),         
             trailing:  const Icon(Icons.arrow_forward_ios_rounded,color: Colors.black,),
            
