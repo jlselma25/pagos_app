@@ -1,6 +1,8 @@
 import 'package:dio/dio.dart';
-import 'package:flutter/foundation.dart';
+
 import 'package:flutter/material.dart';
+import 'package:pagos_app/domains/entities/detalle_registro_leyenda.dart';
+
 import 'package:pagos_app/domains/entities/estadistica.dart';
 import 'package:pagos_app/domains/entities/registro.dart';
 import 'package:pagos_app/global/environment.dart';
@@ -16,6 +18,7 @@ class RegistroService  extends ChangeNotifier{
  
    List<Registro> lstRegistros = [];
    List<Estadistica> lstEstadistica = [];
+   List<DetalleRegistro> lstRegistrosPorLeyenda = [];
    Map<String, double> estadisticasMap  = {};
    bool verLabel = false;
    double totalSalidas = 0;
@@ -234,6 +237,60 @@ Future obtenerSaldo () async{
     }
    
   }
+
+
+ Future<String> cargarRegistrosLeyenda (int numeroLeyenda, String dateFrom, String dateTo) async{ 
+
+     
+      lstRegistros.clear();  
+      final id = await getId();
+      final token = await getToken();
+      verLabel= false;
+      totalEntradas = 0;
+      totalSalidas = 0;
+
+
+       final dio = Dio(BaseOptions(
+                            baseUrl: Environment.apiUrl,
+                            headers: {
+                                        'Content-Type': 'application/json',
+                                        'x-token': token
+                                     }
+                            )
+                       );     
+
+
+      final response = await dio.get('/CargarRegistrosFechasPorLeyenda/',
+              queryParameters: {
+                                  'usuario':id,                                   
+                                  'fechaDesde':dateFrom.toString(),
+                                  'fechaFin':dateTo.toString(),
+                                  'numero': numeroLeyenda
+                                      
+                                });
+
+      if (response.statusCode == 200){
+
+        lstRegistrosPorLeyenda = registrosDetalleFromJsonList(response.data);   
+       
+
+        if (lstRegistrosPorLeyenda.isEmpty) 
+        {
+             return '2';
+        }          
+        
+        return '1';       
+     }  
+
+     return '0';
+
+  }
+
+
+
+
+
+
 
 
   calcularTotales(){

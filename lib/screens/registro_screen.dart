@@ -361,7 +361,6 @@ class _RegistroScreen extends State<RegistroScreen>  {
                       leading: const Icon(Icons.download),
                       title: const Text('Convertir a PDF'),
                       onTap: () async {
-
                         
                               if (lstRegistros.isEmpty){
                                
@@ -376,21 +375,11 @@ class _RegistroScreen extends State<RegistroScreen>  {
 
                  
                  ],
-              ),
-
-
-
-             
+              ),             
              );
-
       }
 
-
      );
-
-
-
-
 
    }
 }

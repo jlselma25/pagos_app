@@ -4,8 +4,10 @@ import 'package:pagos_app/domains/entities/estadistica.dart';
 
 
 import 'package:pagos_app/global/environment.dart';
-import 'package:pagos_app/helpers/colors_listtittle.dart';
+import 'package:pagos_app/helpers/colors_icons_listTittle.dart';
 import 'package:pagos_app/helpers/show_alert.dart';
+import 'package:pagos_app/helpers/show_bottom_sheet.dart';
+
 import 'package:pagos_app/services/registro_service.dart';
 import 'package:pagos_app/services/statics._service.dart';
 
@@ -207,7 +209,7 @@ class _StaticsScreenState extends State<StaticsScreen> {
                         
                             Padding(
                               padding:  const EdgeInsets.symmetric(horizontal: 10),
-                              child: registrosService.filtar == true ? _ListBuilder(lstRegistros: registrosService.lstEstadistica) : const ContainerEmpty()
+                              child: registrosService.filtar == true ? _ListBuilder(lstRegistros: registrosService.lstEstadistica, fechaDesde: fechaController.text,fechaHasta: fechaHastaController.text) : const ContainerEmpty()
                             ) 
  
 
@@ -273,10 +275,14 @@ class _StaticsScreenState extends State<StaticsScreen> {
 class _ListBuilder extends StatelessWidget {
 
   final List<Estadistica> lstRegistros;
+  final String fechaDesde;
+  final String fechaHasta;
   const _ListBuilder(
     {
       super.key, 
-      required this.lstRegistros
+      required this.lstRegistros, 
+      required this.fechaDesde,
+       required this.fechaHasta
       
     });
 
@@ -296,9 +302,10 @@ class _ListBuilder extends StatelessWidget {
           
             final item = lstRegistros[index];            
             Color color =  colorListTittle(item.leyenda);
+            FaIcon icon =  iconsListTittle(item.leyenda);
           
         
-          return  _CustomListTitle(item: item,color: color,);
+          return  _CustomListTitle(item: item,color: color, icon: icon, fechaDesde: fechaDesde,fechaHasta: fechaHasta);
         } ,     
         
       ),
@@ -313,15 +320,25 @@ class _CustomListTitle extends StatelessWidget {
 
   final Estadistica item;
   final Color color;
+  final FaIcon icon;
+  final String fechaDesde;
+  final String fechaHasta;
+
   const _CustomListTitle(
     {
     super.key, 
     required this.item, 
-    required this.color 
+    required this.color,
+     required this.icon, 
+     required this.fechaDesde, 
+     required this.fechaHasta 
     });
 
   @override
   Widget build(BuildContext context) {
+
+     final registrosService = Provider.of<RegistroService>(context, listen: false);
+
     return Container(
       margin: const EdgeInsets.all(6),
      
@@ -330,9 +347,19 @@ class _CustomListTitle extends StatelessWidget {
         borderRadius: BorderRadius.circular(10)
       ),
       child: ListTile(       
-            leading: const FaIcon(FontAwesomeIcons.pizzaSlice,size:25, color: Colors.white,),
+            leading: icon,
             title: Text(item.nombre,style: const TextStyle(color:Colors.white, fontWeight: FontWeight.w600),),         
-            trailing:  const Icon(Icons.arrow_forward_ios_rounded,color: Colors.black,),
+            trailing:  const Icon(Icons.arrow_forward_ios_rounded,color: Colors.white,),
+            onTap: () async{
+
+              final ok = await registrosService.cargarRegistrosLeyenda(item.numero, fechaDesde, fechaHasta);
+
+              if (ok == '1'){
+                 verBottomSheet(context, registrosService.lstRegistrosPorLeyenda, fechaDesde, fechaHasta);
+              }
+           //    verBottomSheet(context, lstRegistros, fechaDesde, fechaHasta);
+              
+            },
            
       ),
     );

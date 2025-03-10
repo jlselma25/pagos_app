@@ -73,7 +73,7 @@ import 'mobile.dart' if(dart.library.html) 'web.dart';
     row.cells[1].value = lstRegistros[i].nombre;
     row.cells[1].style = cellStyle;  // Asignar el estilo de la celda 1
 
-    row.cells[2].value =    numerosDecimalet(lstRegistros[i].importe).replaceAll('.',',').padLeft(10,' '); 
+    row.cells[2].value =    numerosDecimales(lstRegistros[i].importe).replaceAll('.',',').padLeft(10,' '); 
     row.cells[2].style = cellStyle;  // Asignar el estilo de la celda 2
 
     // Establecer bordes personalizados para las celdas si es necesario
