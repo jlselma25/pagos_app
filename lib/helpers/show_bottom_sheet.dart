@@ -37,7 +37,7 @@ void verBottomSheet(BuildContext context,  List<DetalleRegistro> lstDetalleRegis
                             final importe = numerosDecimales(item.importe);
 
                             return  Container(
-                               height: MediaQuery.of(context).size.height * 0.05, 
+                               height: MediaQuery.of(context).size.height * 0.07, 
                                width: MediaQuery.of(context).size.height * 0.2 ,
                                decoration: BoxDecoration(
                                 color: Environment.color.withOpacity(0.3),
