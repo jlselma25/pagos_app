@@ -5,6 +5,7 @@ import 'package:pagos_app/domains/entities/estadistica.dart';
 
 import 'package:pagos_app/global/environment.dart';
 import 'package:pagos_app/helpers/colors_icons_listTittle.dart';
+import 'package:pagos_app/helpers/numeros_decimales.dart';
 import 'package:pagos_app/helpers/show_alert.dart';
 import 'package:pagos_app/helpers/show_bottom_sheet.dart';
 
@@ -276,7 +277,7 @@ class _StaticsScreenState extends State<StaticsScreen> {
         showChartValues: true,
         showChartValuesInPercentage: true,
         showChartValuesOutside: false,
-        decimalPlaces: 1,
+        decimalPlaces: 2,
         chartValueStyle: TextStyle(fontSize: 20)
         
       ),
@@ -303,7 +304,8 @@ class _ListBuilder extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-     final size = MediaQuery.of(context).size;    
+     final size = MediaQuery.of(context).size;   
+     double sumaImportes = lstRegistros.fold(0.0, (previousValue, estatistica) => previousValue + estatistica.importe);    
 
     return Container(
       margin:const EdgeInsetsDirectional.fromSTEB(0, 20, 0, 0),
@@ -315,12 +317,15 @@ class _ListBuilder extends StatelessWidget {
         itemCount: lstRegistros.length,
          itemBuilder: (context,index){
           
-            final item = lstRegistros[index];            
+            final item = lstRegistros[index];      
+             
             Color color =  colorListTittle(item.leyenda);
             FaIcon icon =  iconsListTittle(item.leyenda);
+          //  double porcentaje = (item.importe / sumaImportes) * 100;
+            double porcentaje = double.parse(((item.importe / sumaImportes) * 100).toStringAsFixed(2));
           
         
-          return  _CustomListTitle(item: item,color: color, icon: icon, fechaDesde: fechaDesde,fechaHasta: fechaHasta);
+          return  _CustomListTitle(item: item,color: color, icon: icon, fechaDesde: fechaDesde,fechaHasta: fechaHasta, porcentaje: porcentaje,);
         } ,     
         
       ),
@@ -338,6 +343,7 @@ class _CustomListTitle extends StatelessWidget {
   final FaIcon icon;
   final String fechaDesde;
   final String fechaHasta;
+  final double porcentaje;
 
   const _CustomListTitle(
     {
@@ -346,7 +352,8 @@ class _CustomListTitle extends StatelessWidget {
     required this.color,
      required this.icon, 
      required this.fechaDesde, 
-     required this.fechaHasta 
+     required this.fechaHasta, 
+     required this.porcentaje 
     });
 
   @override
@@ -363,7 +370,13 @@ class _CustomListTitle extends StatelessWidget {
       ),
       child: ListTile(       
             leading: icon,
-            title: Text(item.nombre,style: const TextStyle(color:Colors.white, fontWeight: FontWeight.w600),),         
+            title: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                Text (item.nombre,style: const TextStyle(color:Colors.white, fontWeight: FontWeight.w600)),
+                Text ( '${numerosDecimales(porcentaje)} %',style: const TextStyle(color:Colors.white, fontWeight: FontWeight.w600),),
+              ],
+            ),         
             trailing:  const Icon(Icons.arrow_forward_ios_rounded,color: Colors.white,),
             onTap: () async{
 
