@@ -64,22 +64,8 @@ class _StaticsScreenState extends State<StaticsScreen> {
                                     textField: 'fecha',                             
                                     controller: fechaController,                              
                                     obscureText: false,                             
-                                    texto: 'desde fecha',    
-                                    onTap: () async {
-                                       final DateTime? picked = await showDatePicker(
-                                            context: context,
-                                            initialDate: DateTime.now(),  // Fecha inicial
-                                            firstDate: DateTime(2000),    // Fecha mínima
-                                            lastDate: DateTime(2101),     // Fecha máxima
-                                          );
-                    
-                                          if (picked != null) {
-                                            // Si el usuario selecciona una fecha, actualizamos el TextFormField
-                                            fechaController.text = "${picked.day.toString().padLeft(2,'0')}/${picked.month.toString().padLeft(2,'0')}/${picked.year}";
-                                            FocusScope.of(context).requestFocus(FocusNode());
-                                          }
-                                    },                        
-                                    icon: const Icon(Icons.date_range_sharp,color:Color(0xff615AAB),),
+                                    texto: 'desde fecha',                                      
+                                    icon: const Icon(Icons.date_range_outlined,color:Color(0xff615AAB),),
                                     focusNode: fechaFocusNode,                              
                                         ),
                                   
@@ -97,21 +83,21 @@ class _StaticsScreenState extends State<StaticsScreen> {
                                 controller: fechaHastaController,                              
                                 obscureText: false,                             
                                 texto: 'hasta fecha', 
-                                 onTap: () async {
-                                   final DateTime? picked = await showDatePicker(
-                                        context: context,
-                                        initialDate: DateTime.now(),  // Fecha inicial
-                                        firstDate: DateTime(2000),    // Fecha mínima
-                                        lastDate: DateTime(2101),     // Fecha máxima
-                                      );
+                                //  onTap: () async {
+                                //    final DateTime? picked = await showDatePicker(
+                                //         context: context,
+                                //         initialDate: DateTime.now(),  // Fecha inicial
+                                //         firstDate: DateTime(2000),    // Fecha mínima
+                                //         lastDate: DateTime(2101),     // Fecha máxima
+                                //       );
 
-                                      if (picked != null) {
-                                        // Si el usuario selecciona una fecha, actualizamos el TextFormField
-                                        fechaHastaController.text = "${picked.day.toString().padLeft(2,'0')}/${picked.month.toString().padLeft(2,'0')}/${picked.year}";
-                                        FocusScope.of(context).requestFocus(FocusNode());
-                                      }
-                                },                                                   
-                                icon: const Icon(Icons.date_range_sharp,color:Color(0xff615AAB),) ,
+                                //       if (picked != null) {
+                                //         // Si el usuario selecciona una fecha, actualizamos el TextFormField
+                                //         fechaHastaController.text = "${picked.day.toString().padLeft(2,'0')}/${picked.month.toString().padLeft(2,'0')}/${picked.year}";
+                                //         FocusScope.of(context).requestFocus(FocusNode());
+                                //       }
+                                // },                                                   
+                                icon: const Icon(Icons.date_range_outlined,color:Color(0xff615AAB),) ,
                                 focusNode: fechaHastaFocusNode,                                                          
                                     ),
                               
@@ -454,7 +440,7 @@ class _TextUser extends StatelessWidget {
   final Icon icon;
   final bool readOnly;
   final TextInputType typeKey;
-  final VoidCallback? onTap;
+  //final VoidCallback? onTap;
    final FocusNode focusNode;
 
   const _TextUser({
@@ -466,12 +452,16 @@ class _TextUser extends StatelessWidget {
     required this.readOnly,
     required this.typeKey, 
     required this.focusNode,
-    this.onTap, 
+   
   
   });
 
+   
+
   @override
   Widget build(BuildContext context) {
+
+    ValueChanged<String>? onValue;
     final border =  OutlineInputBorder(        
       borderRadius: BorderRadius.circular(40)
     );
@@ -480,7 +470,7 @@ class _TextUser extends StatelessWidget {
 
 
     return TextFormField(
-        onTap: onTap,
+       
         focusNode: focusNode,
         readOnly: readOnly,
         keyboardType: typeKey,
@@ -497,9 +487,37 @@ class _TextUser extends StatelessWidget {
           focusColor: colors.primary,          
           focusedBorder: border.copyWith(borderSide: BorderSide(color: colors.primary)),
           prefixIcon:  icon,
+          suffixIcon: IconButton(
+              onPressed: () async {
+                final texto = controller.text;
+                print(texto);
+
+                final DateTime? picked = await showDatePicker(
+                                        context: context,
+                                        initialDate: DateTime.now(),  // Fecha inicial
+                                        firstDate: DateTime(2000),    // Fecha mínima
+                                        lastDate: DateTime(2101),     // Fecha máxima
+                                      );
+
+                                      if (picked != null) {
+                                        // Si el usuario selecciona una fecha, actualizamos el TextFormField
+                                        controller.text = "${picked.day.toString().padLeft(2,'0')}/${picked.month.toString().padLeft(2,'0')}/${picked.year}";
+                                        FocusScope.of(context).requestFocus(FocusNode());
+                                      }
+
+
+
+
+
+              }, 
+              icon: const Icon(Icons.date_range_sharp)
+                      ),
           //prefixIcon:  textField == 'importe' ?  const Icon(Icons.money_outlined,color: Color(0xff615AAB),) :  const Icon(Icons.password,color:Color(0xff615AAB),),
-          label:     Text(texto)
+          label: Text(texto)
         ),
+        // onFieldSubmitted: (value){
+        //    //  onValue!(value);
+        // },
       
     );
   }
