@@ -30,7 +30,10 @@ class RegistroService  extends ChangeNotifier{
     void deleteLista()
     {
       lstRegistros.clear();
+      lstEstadistica.clear();
+      estadisticasMap  = {};
       verLabel = false;
+      filtar = false;
     }
 
 

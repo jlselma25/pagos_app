@@ -26,9 +26,22 @@ class _StaticsScreenState extends State<StaticsScreen> {
 
    TextEditingController fechaController = TextEditingController();
    TextEditingController fechaHastaController = TextEditingController();
-  final FocusNode fechaFocusNode = FocusNode();
-  final FocusNode fechaHastaFocusNode = FocusNode();
+   final FocusNode fechaFocusNode = FocusNode();
+   final FocusNode fechaHastaFocusNode = FocusNode();
 
+
+@override
+  void initState() {   
+    super.initState();
+    final registroService = Provider.of<RegistroService>(context,listen: false); 
+    registroService.deleteLista();  
+  }
+
+  @override
+  void dispose() {    
+    super.dispose();
+   
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -122,7 +135,9 @@ class _StaticsScreenState extends State<StaticsScreen> {
                                  // ignore: use_build_context_synchronously
                                     await showAlert2( context, 'No existe ningun registro en ese periódo', Environment.proyecto);                                
                                     return;
-                                 }                      
+                                 }        
+
+                               
                                   
                                },                         
                         
@@ -230,7 +245,7 @@ class _StaticsScreenState extends State<StaticsScreen> {
   }
 
    Widget _showGrafic(  Map<String, double> dataMap){
-    final size = MediaQuery.of(context).size;    
+    final size = MediaQuery.of(context).size;     
 
   //   Map<String, double> dataMap = {
   //   "Flutter": 5,
