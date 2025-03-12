@@ -20,17 +20,17 @@ List<Color> colores = const [
 
 List<FaIcon> icons = const [
   
-  FaIcon(FontAwesomeIcons.pizzaSlice,size:25, color: Colors.white,),
-  FaIcon(FontAwesomeIcons.moneyBill,size:25, color: Colors.white,),
-  FaIcon(FontAwesomeIcons.buildingColumns,size:25, color: Colors.white,),
-  FaIcon(FontAwesomeIcons.car,size:25, color: Colors.white,),
-  FaIcon(FontAwesomeIcons.houseChimneyWindow,size:25, color: Colors.white,),
-  FaIcon(FontAwesomeIcons.laptop,size:25, color: Colors.white,),
-  FaIcon(FontAwesomeIcons.carOn,size:25, color: Colors.white,),
-  FaIcon(FontAwesomeIcons.utensils,size:25, color: Colors.white,),
-  FaIcon(FontAwesomeIcons.planeDeparture,size:25, color: Colors.white,),
-  FaIcon(FontAwesomeIcons.faceLaugh,size:25, color: Colors.white,),
-  FaIcon(FontAwesomeIcons.shirt,size:25, color: Colors.white,),
+  FaIcon(FontAwesomeIcons.pizzaSlice,size:25, color: Colors.black,),
+  FaIcon(FontAwesomeIcons.moneyBill,size:25, color: Colors.black,),
+  FaIcon(FontAwesomeIcons.buildingColumns,size:25, color: Colors.black,),
+  FaIcon(FontAwesomeIcons.car,size:25, color: Colors.black,),
+  FaIcon(FontAwesomeIcons.houseChimneyWindow,size:25, color: Colors.black,),
+  FaIcon(FontAwesomeIcons.laptop,size:25, color: Colors.black,),
+  FaIcon(FontAwesomeIcons.carOn,size:25, color: Colors.black,),
+  FaIcon(FontAwesomeIcons.utensils,size:25, color: Colors.black,),
+  FaIcon(FontAwesomeIcons.planeDeparture,size:25, color: Colors.black,),
+  FaIcon(FontAwesomeIcons.faceLaugh,size:25, color: Colors.black,),
+  FaIcon(FontAwesomeIcons.shirt,size:25, color: Colors.black,),
 ];
 
 
@@ -85,7 +85,7 @@ FaIcon iconsListTittle(String leyenda){
                 break;              
              
                default:
-                 icon =  const FaIcon(FontAwesomeIcons.images,size:25, color: Colors.white,);                 
+                 icon =  const FaIcon(FontAwesomeIcons.images,size:25, color: Colors.black,);                 
 
             }
 

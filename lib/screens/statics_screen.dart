@@ -373,11 +373,11 @@ class _CustomListTitle extends StatelessWidget {
             title: Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
-                Text (item.nombre,style: const TextStyle(color:Colors.white, fontWeight: FontWeight.w600)),
-                Text ( '${numerosDecimales(porcentaje)} %',style: const TextStyle(color:Colors.white, fontWeight: FontWeight.w600),),
+                Text (item.nombre,style: const TextStyle(color:Colors.black, fontWeight: FontWeight.w600)),
+                Text ( '${numerosDecimales(porcentaje)} %',style: const TextStyle(color:Colors.black, fontWeight: FontWeight.w600),),
               ],
             ),         
-            trailing:  const Icon(Icons.arrow_forward_ios_rounded,color: Colors.white,),
+            trailing:  const Icon(Icons.arrow_forward_ios_rounded,color: Colors.black,),
             onTap: () async{
 
               final ok = await registrosService.cargarRegistrosLeyenda(item.numero, fechaDesde, fechaHasta);
