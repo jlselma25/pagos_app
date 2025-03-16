@@ -70,8 +70,12 @@ void verBottomSheet(BuildContext context,  List<DetalleRegistro> lstDetalleRegis
                        ),
                      ),
                    ),
-
-                 Text('Total importe:  ${numerosDecimales(totalImporte)} €',style: const TextStyle(fontWeight: FontWeight.bold),)
+                  
+                 Text('Total importe:  ${numerosDecimales(totalImporte)} €',style: const TextStyle(fontWeight: FontWeight.bold),),
+                 SizedBox(
+                   height: MediaQuery.of(context).size.height * 0.1, 
+                   width: MediaQuery.of(context).size.height * 0.2 ,
+                 )
                  ],
               ),             
              );
