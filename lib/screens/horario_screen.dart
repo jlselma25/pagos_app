@@ -5,6 +5,7 @@
 import 'package:flutter/material.dart';
 
 import 'package:pagos_app/global/environment.dart';
+import 'package:pagos_app/helpers/colors_icons_listTittle.dart';
 import 'package:pagos_app/helpers/show_alert.dart';
 import 'package:pagos_app/services/auth_service.dart';
 import 'package:pagos_app/widgets/logo.dart';
@@ -76,18 +77,29 @@ class _HorarioScreenState extends State<HorarioScreen> {
 
     return Scaffold(
       // resizeToAvoidBottomInset: false,
-      backgroundColor: Colors.white,
+      // backgroundColor: Colors.white,
       appBar:  AppBar(
         //title:  const Text('Registros'),
         backgroundColor: Colors.white,
         centerTitle: true,
+     
         leading: IconButton(
           icon: const Icon(Icons.arrow_back_ios_new_outlined),
           onPressed: () {          
             Navigator.pop(context);
           },
         ),
+        actions: const [
+
+          Padding(
+            padding: EdgeInsets.fromLTRB(0, 0, 10, 0),
+            child: _Menu(),
+          )
+         
+        ],
+      
       ),
+      
       body: SafeArea(
         child: SingleChildScrollView(
           child: Column(
@@ -263,6 +275,56 @@ class _HorarioScreenState extends State<HorarioScreen> {
 
 
   }
+
+class _Menu extends StatelessWidget {
+  const _Menu({
+    super.key,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return PopupMenuButton(
+       color:Colors.white, 
+       tooltip: '',
+       icon:const Icon(Icons.more_vert_outlined) ,
+        onSelected: (value) {
+        // Maneja la opción seleccionada
+        ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(content: Text('Seleccionaste: $value')),
+        );
+      },
+      itemBuilder: (BuildContext context){
+        return [
+    
+           PopupMenuItem<String>(
+            value: '1',
+            child: Container(
+              width:MediaQuery.of(context).size.height * 0.3 ,  
+              decoration: BoxDecoration(
+                borderRadius: BorderRadius.circular(10),
+                 color:Environment.color
+              ),
+             
+              
+              child: const Padding(
+                padding: EdgeInsets.all(10),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    Text('Añadir apuntes fijos',style: TextStyle(color: Colors.white),),
+                  ],
+                ),
+              )
+              ),
+          ),
+         
+    
+    
+        ]; 
+      }
+      );
+  }
+}
 
   
 

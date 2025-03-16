@@ -1,6 +1,8 @@
+
+
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
-import 'package:pie_chart/pie_chart.dart';
+import 'package:pagos_app/domains/entities/registro.dart';
+
 
 
 
@@ -34,14 +36,8 @@ class PruebaScreen extends StatelessWidget {
           aspectRatio: 1.0,
           child: Container(
             color: Colors.white,
-            margin: EdgeInsets.all(20),
-            child: PieChart(
-              chartType: ChartType.ring,
-              initialAngleInDegree: 90,
-              chartLegendSpacing: 180,
-              chartRadius: 250,
-              
-              dataMap: mapData),
+            margin: const EdgeInsets.symmetric(vertical: 50),
+            child: _CustopmListtile()
           ),
 
           ),
@@ -53,6 +49,151 @@ class PruebaScreen extends StatelessWidget {
         
     
     
+    );
+  }
+}
+
+
+
+
+class _CustopmListtile extends StatelessWidget {
+
+  
+
+  @override
+  Widget build(BuildContext context) {
+    List<Registro> lst = [
+      Registro(importe: 24, fecha: '01/', tipo: 'C', token: 'dddddd', nombre: 'jose', id: 2, leyenda: 'al'),
+      Registro(importe: 24, fecha: '01/', tipo: 'C', token: 'dddddd', nombre: 'jose', id: 2, leyenda: 'al'),
+
+    ];
+    return Container(
+      width: 800,
+      height: 800,
+      color: Colors.grey.withOpacity(0.5),
+      child: ListView.builder(
+        itemCount: lst.length,
+        itemBuilder: (context,index) {
+
+          final item =lst[index];
+
+          return ListTile(
+            leading:SizedBox(
+              width: 40,
+              height: 40,
+              child: Container(
+                
+                decoration: BoxDecoration(
+                  color: Colors.lightGreenAccent,
+                  borderRadius: BorderRadius.circular(10)
+
+                ),
+                child: Column(
+                
+                  children: [
+                    Expanded(
+                      child: Padding(
+                        padding: const EdgeInsets.symmetric(vertical: 10),
+                        child: Text(item.importe.toString(),style: const TextStyle(fontWeight: FontWeight.bold),),
+                      )
+                      ),
+                  ],
+                ))),
+            title: Container(
+              
+              height: 40,
+             
+              decoration: BoxDecoration(
+                borderRadius: BorderRadius.circular(10),
+                 color: Colors.white,
+              ),
+               child: Padding(
+                 padding: const EdgeInsets.symmetric(horizontal:10,vertical: 10),
+                 child: Text(item.nombre.toString(),style: const TextStyle(fontWeight: FontWeight.bold),),
+               ),
+            )
+          );
+
+        }
+        
+        
+        ),
+    );
+  }
+}
+
+
+
+
+
+
+
+
+class _StackContainer extends StatelessWidget {
+
+
+  @override
+  Widget build(BuildContext context) {
+    return Stack(
+      children: [
+    
+         Container(
+          
+          width: 408,
+          height: 40,
+          decoration: BoxDecoration(
+            color: Colors.white,
+            borderRadius: BorderRadius.circular(20)
+          ),
+        
+    
+        ),
+        Container(
+          
+          width: 40,
+          height: 40,
+          decoration: BoxDecoration(
+            color: Colors.green.withOpacity(0.7),
+            borderRadius: const BorderRadius.only(topLeft: Radius.circular(20),bottomLeft: Radius.circular(20),topRight: Radius.zero,bottomRight: Radius.zero)
+          ),
+          child: const Column(
+            crossAxisAlignment: CrossAxisAlignment.center,
+            children: [
+              Expanded(
+                child: Padding(
+                  
+                  padding: EdgeInsets.symmetric(vertical: 10,horizontal: 5),
+                  child: Text('35 €',style: TextStyle(fontWeight: FontWeight.bold)),
+                )
+                )
+            ],
+          ),
+    
+        ),
+    
+        Container(
+          margin: const EdgeInsets.symmetric(horizontal: 40),
+          width: 360,
+          height: 40,
+          decoration:  BoxDecoration(
+            color: Colors.grey.withOpacity(0.3),
+            borderRadius: const BorderRadius.only(topLeft: Radius.zero,bottomLeft: Radius.zero,topRight: Radius.circular(20),bottomRight: Radius.circular(20)),
+          ),
+           child: const Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Expanded(
+                child: Padding(
+                  
+                  padding: EdgeInsets.symmetric(vertical: 10,horizontal: 5),
+                  child: Text('concepoto',style: TextStyle(fontWeight: FontWeight.bold)),
+                )
+                )
+            ],
+          ),
+    
+        )
+      ],
     );
   }
 }
