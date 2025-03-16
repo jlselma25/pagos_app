@@ -11,6 +11,7 @@ import 'package:pagos_app/helpers/numeros_decimales.dart';
 void verBottomSheet(BuildContext context,  List<DetalleRegistro> lstDetalleRegistros, String fechaDesde, String fechaHasta) {
 
      double totalImporte = lstDetalleRegistros.fold(0.0, (sum, producto) => sum + producto.importe);
+      totalImporte= double.parse( totalImporte.toStringAsFixed(2));   
      
      showModalBottomSheet(
       context: context,
@@ -23,7 +24,7 @@ void verBottomSheet(BuildContext context,  List<DetalleRegistro> lstDetalleRegis
                                 topLeft: Radius.circular(15),
                                 topRight: Radius.circular(15)), 
                           ),
-              height: MediaQuery.of(context).size.height * 0.3, 
+              height: MediaQuery.of(context).size.height * 0.4, 
               width: MediaQuery.of(context).size.height * 0.7 ,   
               child:   Column(
                 mainAxisAlignment: MainAxisAlignment.center,
@@ -73,7 +74,7 @@ void verBottomSheet(BuildContext context,  List<DetalleRegistro> lstDetalleRegis
                   
                  Text('Total importe:  ${numerosDecimales(totalImporte)} €',style: const TextStyle(fontWeight: FontWeight.bold),),
                  SizedBox(
-                   height: MediaQuery.of(context).size.height * 0.1, 
+                   height: MediaQuery.of(context).size.height * 0.05, 
                    width: MediaQuery.of(context).size.height * 0.2 ,
                  )
                  ],
