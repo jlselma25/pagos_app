@@ -140,6 +140,8 @@ class AuthService extends ChangeNotifier{
            if(respuesta.valor == '1'){
 
             if (respuesta.token.isNotEmpty){
+
+              print (respuesta.token);
               saveToken(respuesta.token);
               saveId(respuesta.id);
               saveUser(email);
