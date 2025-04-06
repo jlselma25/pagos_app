@@ -39,6 +39,10 @@ class _RegistroScreen extends State<RegistroScreen>  {
   void initState() {    
     super.initState();
     final registroService = Provider.of<RegistroService>(context,listen: false); 
+   
+    fechaController.text = dateOfDay();
+    fechaControllerHasta.text = dateOfDay();
+ 
     registroService.deleteLista();  
     obtenerSaldoDelUsuario();      
    
@@ -300,7 +304,7 @@ class _RegistroScreen extends State<RegistroScreen>  {
                                String? result = await showAlertConfirmar(context, 'Va a eliminar un registro, ¿está seguro?', 'Confirmación');
 
                                if (result == 'OK'){
-                                  final resultado = await registroService.eliminarRegistr0(index,registroService.lstRegistros[index].id);                                            
+                                  final resultado = await registroService.eliminarRegistr0(index,registroService.lstRegistros[index].id,registroService.lstRegistros[index].importe);                                            
 
                                   if(resultado == "0")
                                   {

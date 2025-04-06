@@ -19,3 +19,15 @@ Future<String> comprobarFechas(String fechaDesde , String fechaHasta) async{
   return '';
 
 }
+
+
+
+
+String dateOfDay(){
+
+   DateTime now = DateTime.now();
+   String date = "${now.day.toString().padLeft(2, '0')}/${now.month.toString().padLeft(2, '0')}/${now.year}";
+
+
+   return date;
+}

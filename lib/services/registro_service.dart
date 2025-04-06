@@ -198,7 +198,7 @@ Future obtenerSaldo () async{
   }
 
 
-  Future<String> eliminarRegistr0(int index,int id) async{
+  Future<String> eliminarRegistr0(int index,int id, double importe) async{
     
      if (id != -1)
      {                 
@@ -209,6 +209,7 @@ Future obtenerSaldo () async{
 
           final response = await dio.get('/EliminarRegistro/', queryParameters: {
             'id': id,
+            'importe': importe
           });                                       
                                             
           if (response.statusCode == 200)

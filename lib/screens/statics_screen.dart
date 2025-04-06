@@ -5,6 +5,7 @@ import 'package:pagos_app/domains/entities/estadistica.dart';
 
 import 'package:pagos_app/global/environment.dart';
 import 'package:pagos_app/helpers/colors_icons_listTittle.dart';
+import 'package:pagos_app/helpers/comprobacion_fechas.dart';
 import 'package:pagos_app/helpers/numeros_decimales.dart';
 import 'package:pagos_app/helpers/show_alert.dart';
 import 'package:pagos_app/helpers/show_bottom_sheet.dart';
@@ -34,6 +35,8 @@ class _StaticsScreenState extends State<StaticsScreen> {
 @override
   void initState() {   
     super.initState();
+    fechaHastaController.text = dateOfDay();
+    fechaController.text = dateOfDay();
     final registroService = Provider.of<RegistroService>(context,listen: false); 
     registroService.deleteLista();  
   }

@@ -5,7 +5,7 @@
 import 'package:flutter/material.dart';
 
 import 'package:pagos_app/global/environment.dart';
-import 'package:pagos_app/helpers/colors_icons_listTittle.dart';
+import 'package:pagos_app/helpers/comprobacion_fechas.dart';
 import 'package:pagos_app/helpers/show_alert.dart';
 import 'package:pagos_app/services/auth_service.dart';
 import 'package:pagos_app/widgets/logo.dart';
@@ -38,6 +38,7 @@ class _HorarioScreenState extends State<HorarioScreen> {
   void initState() {
     super.initState();
     tarjetaController = TextEditingController();
+    fechaController.text = dateOfDay();
     cargarTipos();
     cargarCategorias();
    
